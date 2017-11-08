@@ -8,5 +8,13 @@ public class Pair<A,B> {
 		this.first = first;
 		this.second = second;
 	}
+	
+	public A car() {
+		return first;
+	}
+
+	public B cdr() {
+		return second;
+	}
 
 }
