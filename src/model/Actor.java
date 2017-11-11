@@ -4,7 +4,8 @@ import structures.DataList;
 import structures.Pair;
 
 public class Actor {
-
+	private static int uuid = 0;
+	private int uid;
 	public Actor() {
 		// TODO Auto-generated constructor stub
 	}
