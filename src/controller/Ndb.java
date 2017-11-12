@@ -31,7 +31,7 @@ public class Ndb {
 		link();
 	}
 	private static void convert(DataList<Pair<String, String>> object) throws Exception {
-		Pair<String, String> type = object.search((Pair<String, String> a) -> {return a.car().equals("type");});
+		Pair<String, String> type = object.get((Pair<String, String> p) -> {return p.car().equals("type");});
 		if(type.cdr().equals("Actor")) {
 			Actor.ndb(object);
 		}
@@ -44,6 +44,9 @@ public class Ndb {
 	}
 	private static void link() {
 		references = null;
+	}
+	public static String extract(DataList<Pair<String, String>> object, String field) {
+		return object.get(p -> p.car() == field).cdr();
 	}
 
 }

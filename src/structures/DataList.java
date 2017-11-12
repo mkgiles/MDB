@@ -43,6 +43,11 @@ public class DataList<T> {
 	public DataList(T data, DataList<T> list) {
 		head = new Node(data, copy(list));
 	}
+	public DataList(int length, T data) {
+		this(data);
+		for(int i = 1; i<length; i++)
+			this.append(data);
+	}
 	public DataList<T> copy(DataList<T> list){
 		DataList<T> temp = new DataList<T>(list.head.data);
 		Node head = list.head.next;
@@ -78,11 +83,25 @@ public class DataList<T> {
 				temp.next.next.prev = temp.next;
 		}
 	}
-	public T search(Predicate<T> p) {
+	public T get(Predicate<T> p) {
 		for(Node temp = head; temp != null; temp = temp.next) {
 			if(p.test(temp.data))
 				return temp.data;
 		}
 		return null;
+	}
+	private Node getNode(int index) {
+		Node temp = head;
+		for(int i = 0; i<index && temp!=null; i++, temp = temp.next);
+		if(temp!=null)
+			return temp;
+		return null;
+	}
+	public T get(int index) {
+		Node node = getNode(index);
+		return node==null?null:node.data;
+	}
+	public void set(int index, T data) {
+		getNode(index).data = data;
 	}
 }
