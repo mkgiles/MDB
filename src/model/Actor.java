@@ -15,4 +15,9 @@ public class Actor {
 		
 	}
 
+	public void viewActor()
+	{
+		System.out.print("Showing actors");
+	}
+	
 }

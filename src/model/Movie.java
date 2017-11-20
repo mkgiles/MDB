@@ -14,5 +14,10 @@ public class Movie {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void viewMovie()
+	{
+		System.out.print("Showing movies");
+	}
 
 }
