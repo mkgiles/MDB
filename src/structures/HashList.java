@@ -5,6 +5,8 @@ import java.util.function.BiPredicate;
 //Vector of entries, ordered list of keys.
 public class HashList<T> {
 	private Node<T>[] data;
+	public Node<T> head;
+	private Node<T> tail;
 	@SuppressWarnings("unchecked")
 	public HashList(int length) {
 		data = (Node<T>[])(new Object[length]);
@@ -29,7 +31,7 @@ public class HashList<T> {
 				merged[n] = right[i];
 		return merged;
 	}
-	private static Node[] sort(Node[] data, BiPredicate<Node,Node> p) {
+	private static Node[] mergesort(Node[] data, BiPredicate<Node,Node> p) {
 		Node[] sorted = new Node[data.length];
 		if(data.length == 1)
 			sorted = data;
@@ -40,8 +42,8 @@ public class HashList<T> {
 				left[i] = data[i];
 			for(int i = midpoint;i<data.length;i++)
 				right[i-midpoint] = data[i];
-			left = sort(left, p);
-			right = sort(right, p);
+			left = mergesort(left, p);
+			right = mergesort(right, p);
 			if(p.test(left[left.length-1], right[0])) {
 				for(int i = 0; i<data.length;i++) {
 					if(i<midpoint)
@@ -54,6 +56,19 @@ public class HashList<T> {
 				sorted = merge(left, right, p);
 		}
 		return sorted;
+	}
+	private void sort(BiPredicate<Node,Node> p) {
+		Node[] list = mergesort(data, p);
+		for(int i = 0; i<data.length;i++) {
+			if(i!=data.length)
+				list[i].next = data[i+1];
+			else
+				list[i].next = null;
+			if(i!=0)
+				list[i].prev = data[i-1];
+			else
+				list[i].prev = null;
+		}
 	}
 	private static class FNV {
 		private static final long prime = 16777619;
@@ -68,8 +83,16 @@ public class HashList<T> {
 			return (int) hash;
 		}
 	}
-	public static int uid(String name, String year) {
-		String key = name + year;
-		return FNV.hash(key.getBytes());
+	
+	public DataList list() {
+		DataList<T> list = new DataList<T>(head.data);
+		for(Node<T> local = head.next,foreign = list.head; local != null; local = local.next,foreign = foreign.next) {
+			foreign.next = new Node<T>(foreign, local.data);
+		}
+		return list;
+	}
+	
+	public static int uid(Object object) {
+		return FNV.hash(object.toString().getBytes());
 	}
 }

@@ -15,20 +15,23 @@ public class Ndb {
 		file.mark(1024);
 		String args = "";
 		String line = file.readLine();
-		if(line.startsWith(" ")) {
-			args = args.concat(line);
-		}
-		else {
-			file.reset();
-			String[] params = args.split("//s+");
-			DataList<Pair<String,String>> object = new DataList<Pair<String, String>>(new Pair<String,String>(params[0].split("=")[0],params[0].split("=")[1]));
-			for(int i=1;i<params.length;i++) {
-				Pair<String, String> temp = new Pair<String, String>(params[i].split("=")[0],params[i].split("=")[1]);
-				object.append(temp);
+		while(line != null) {
+			if(line.startsWith(" ")) {
+				args = args.concat(line);
 			}
-			convert(object);
+			else {
+				file.reset();
+				String[] params = args.split("//s+");
+				DataList<Pair<String,String>> object = new DataList<Pair<String, String>>(new Pair<String,String>(params[0].split("=")[0],params[0].split("=")[1]));
+				for(int i=1;i<params.length;i++) {
+					Pair<String, String> temp = new Pair<String, String>(params[i].split("=")[0],params[i].split("=")[1]);
+					object.append(temp);
+				}
+				convert(object);
+				args = "";
+			}
+			line = file.readLine();
 		}
-		link();
 	}
 	private static void convert(DataList<Pair<String, String>> object) throws Exception {
 		Pair<String, String> type = object.get((Pair<String, String> p) -> {return p.car().equals("type");});
@@ -42,7 +45,9 @@ public class Ndb {
 			throw(new Exception("Invalid type."));
 		}
 	}
-	private static void link() {
+	private static <A,B> void link(HashList<A> sources, HashList<B> dests) {
+		for(Node<A> source = sources.head; source != null; source = source.next) {
+		}
 		references = null;
 	}
 	public static String extract(DataList<Pair<String, String>> object, String field) {

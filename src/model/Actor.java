@@ -1,6 +1,7 @@
 package model;
 
 import structures.DataList;
+import structures.Link;
 import structures.Pair;
 
 public class Actor {

@@ -10,5 +10,15 @@ public class Link<A,I,B> {
 		this.dest = dest;
 		this.path = path;
 	}
+	
+	public A source() {
+		return source;
+	}
+	public B dest() {
+		return dest;
+	}
+	public I path() {
+		return path;
+	}
 
 }

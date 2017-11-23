@@ -1,8 +1,8 @@
 package structures;
 
-class Node<T> {
-	T data;
-	Node<T> next;
+public class Node<T> {
+	public T data;
+	public Node<T> next;
 	Node<T> prev;
 
 	Node(T data, Node<T> next, Node<T> prev) {
