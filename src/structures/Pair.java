@@ -1,6 +1,7 @@
 package structures;
 
 public class Pair<A,B> {
+	//Pairs represent objects that are linked directly together.
 	private A first;
 	private B second;
 

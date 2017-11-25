@@ -1,6 +1,7 @@
 package structures;
 
 public class Link<A,I,B> {
+	//Links represent the connections between two objects in a pseudo-database.
 	private A source;
 	private B dest;
 	private I path;
