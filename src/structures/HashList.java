@@ -2,18 +2,25 @@ package structures;
 
 import java.util.function.BiPredicate;
 
-//Vector of entries, ordered list of keys.
 public class HashList<T> {
+	/* HashList contains an array of Nodes, these Nodes are linked together to form a DataList which can be parsed and sorted for display.
+	 * Inserting data into the HashList requires hashing the input data with an FNV 1-a hash to dictate where in the Array it goes.
+	 * While sorting the DataList is done using a Mergesort with a comparative BiPredicate to decide which order the Nodes are linked.
+	 * The Head and Tail Nodes contained by the HashList specify the start and end points of this virtual DataList.
+	 * As such the HashList can be treated like a bucket array or like a DataList, depending on which functions are used.*/
 	private Node<T>[] data;
 	public Node<T> head;
 	private Node<T> tail;
+	//Create an empty array of Nodes of fixed length.
 	@SuppressWarnings("unchecked")
 	public HashList(int length) {
 		data = (Node<T>[])(new Object[length]);
 	}
+	//Get the data at the specified key.
 	public T get(String key) {
 		return data[FNV.hash(key.getBytes())].data;
 	}
+	//Merge half of the mergesort algorithm.
 	private static Node[] merge(Node[] left, Node[] right, BiPredicate<Node,Node> p) {
 		Node[] merged = new Node[left.length + right.length];
 		int n = 0,i=0,j=0;
@@ -31,6 +38,7 @@ public class HashList<T> {
 				merged[n] = right[i];
 		return merged;
 	}
+	//Sort half of the mergesort algorithm.
 	private static Node[] mergesort(Node[] data, BiPredicate<Node,Node> p) {
 		Node[] sorted = new Node[data.length];
 		if(data.length == 1)
@@ -57,6 +65,7 @@ public class HashList<T> {
 		}
 		return sorted;
 	}
+	//Function which calls mergesort on the HashList with a given comparison function.
 	private void sort(BiPredicate<Node,Node> p) {
 		Node[] list = mergesort(data, p);
 		for(int i = 0; i<data.length;i++) {
@@ -70,9 +79,13 @@ public class HashList<T> {
 				list[i].prev = null;
 		}
 	}
+	//Class for the Fowler-Noll-Vo Hash algorithm.
 	private static class FNV {
+		//Smallest FNV Prime.
 		private static final long prime = 16777619;
+		//FNV offset for integer lengths.
 		private static final long offset = 2166136261L;
+		//FNV hash function.
 		private static int hash(byte[] data) {
 			long hash = offset;
 			for(byte unit : data) {
@@ -83,7 +96,7 @@ public class HashList<T> {
 			return (int) hash;
 		}
 	}
-	
+	//Method for extracting the virtual list as a DataList object.
 	public DataList list() {
 		DataList<T> list = new DataList<T>(head.data);
 		for(Node<T> local = head.next,foreign = list.head; local != null; local = local.next,foreign = foreign.next) {
@@ -91,7 +104,7 @@ public class HashList<T> {
 		}
 		return list;
 	}
-	
+	//Method for generating a hash for any object.
 	public static int uid(Object object) {
 		return FNV.hash(object.toString().getBytes());
 	}

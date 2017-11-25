@@ -4,8 +4,10 @@ import structures.*;
 import model.*;
 
 public class API {
+	//Lists composing the pseudo-database.
 	private static DataList<Actor> actors = null;
 	private static DataList<Movie> movies = null;
+	private static DataList<Link<Actor,String,Movie>> roles = null;
 	public static void addActor(Actor actor) {
 		if(actors==null) {
 			actors = new DataList<Actor>(actor);
