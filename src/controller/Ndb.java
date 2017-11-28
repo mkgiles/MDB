@@ -34,6 +34,7 @@ public class Ndb {
 			}
 			line = file.readLine();
 		}
+		file.close();
 	}
 	//method which parses the type of the entry and calls the corresponding conversion procedure.
 	private static void convert(DataList<Pair<String, String>> object) throws Exception {

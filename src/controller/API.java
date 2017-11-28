@@ -31,8 +31,8 @@ public class API {
 	}
 	
 	//Used to get Actor through the use of UID's?
-	public static void getActor(int movieUID) 
+	public static Actor getActor(String name) 
 	{
-		
+		return actors.get(p -> {return p.getName()==name;});
 	}
 }

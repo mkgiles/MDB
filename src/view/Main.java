@@ -54,6 +54,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
        //API.addMovie(movie);  
 }
 	public void handleAddActors(ActionEvent event) {
-        System.out.println("Add Actors");     
-}
+        System.out.println("Add Actors");    
+	}
 }

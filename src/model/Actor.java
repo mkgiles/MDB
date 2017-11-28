@@ -12,7 +12,7 @@ public class Actor {
 	private int gender;
 	private String nationality;
 	
-	Actor(String name, int gender, String nationality, int yearNum, int monthNum, int dayNum)
+	public Actor(String name, int gender, String nationality, int yearNum, int monthNum, int dayNum)
 	{
 		this.uid = uuid;
 		uuid = uuid+1;
@@ -22,10 +22,6 @@ public class Actor {
 		setDob(yearNum, monthNum, dayNum);
 	}
 	
-	
-	public Actor() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public static void ndb(DataList<Pair<String, String>> object) {
 		// TODO Auto-generated method stub
