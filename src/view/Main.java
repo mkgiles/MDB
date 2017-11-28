@@ -2,10 +2,12 @@ package view;
 
 import java.io.IOException;
 
+import controller.API;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import model.*;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -44,8 +46,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	public void handleViewActor(ActionEvent event) {
     System.out.println("View Actors");     
 }
+	
+	//This is how movies are added? Requires Movie be public.
 	public void handleAddMovie(ActionEvent event) {
-        System.out.println("Add Movies");     
+        System.out.println("Add Movies");
+       // Movie movie = new Movie("Title of Movie", 1, "Horror", "A Horror movie", "URL of Poster");
+       //API.addMovie(movie);  
 }
 	public void handleAddActors(ActionEvent event) {
         System.out.println("Add Actors");     

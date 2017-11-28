@@ -22,4 +22,17 @@ public class API {
 		else
 			movies.append(movie);
 	}
+	
+	
+	//Used to get Movies through the use of UID's? 
+	public static void getMovie(int actorUID) 
+	{
+		
+	}
+	
+	//Used to get Actor through the use of UID's?
+	public static void getActor(int movieUID) 
+	{
+		
+	}
 }
