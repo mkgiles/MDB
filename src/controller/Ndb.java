@@ -9,9 +9,7 @@ import model.*;
 import structures.*;
 //Class for parsing .ndb files and constructing a pseudo-database out of them.
 public class Ndb {
-	//List of references built up in phase one for phase two.
-	private static DataList<Link<Integer, String, Integer>> references = null;
-	//phase one: reads the file and creates objects from the entries. Entries containing references to other entities are stored as links in the references list.
+	//phase one: reads the file and creates objects from the entries.
 	public static void parse(String filename) throws Exception {
 		BufferedReader file = new BufferedReader(new FileReader(filename));
 		file.mark(1024);
@@ -39,25 +37,63 @@ public class Ndb {
 	//method which parses the type of the entry and calls the corresponding conversion procedure.
 	private static void convert(DataList<Pair<String, String>> object) throws Exception {
 		Pair<String, String> type = object.get((Pair<String, String> p) -> {return p.car().equals("type");});
-		if(type.cdr().equals("Actor")) {
-			Actor.ndb(object);
+		if(type.cdr().equals("actor")) {
+			actor(object);
 		}
-		else if(type.cdr().equals("Movie")) {
-			Movie.ndb(object);
+		else if(type.cdr().equals("movie")) {
+			movie(object);
+		}
+		else if(type.cdr().equals("reference")) {
+			reference(object);
 		}
 		else {
 			throw(new Exception("Invalid type."));
 		}
 	}
-	//Phase two: converts all links in references list to corresponding references in the pseudo-database.
-	private static <A,B> void link(HashList<A> sources, HashList<B> dests) {
-		for(Node<A> source = sources.head; source != null; source = source.next) {
-		}
-		references = null;
+	private static void reference(DataList<Pair<String, String>> object) {
+		
 	}
-	//function for extracting values for fields, used by NDB conversion procedures.
-	public static String extract(DataList<Pair<String, String>> object, String field) {
+	private static String extract(DataList<Pair<String, String>> object, String field) {
 		return object.get(p -> p.car() == field).cdr();
 	}
-
+	private static void actor(DataList<Pair<String, String>> object) throws Exception {
+		String name = "", nation = "";
+		int year = 0, month = 0, day = 0;
+		Boolean gender = false;
+		for(int i=0; i<object.length();i++) {
+			switch(object.get(i).car()) {
+			case "type":
+				if(!(extract(object,"type").equals("actor")))
+					throw (new Exception("Non-Actor object was parsed by Actor method."));
+				break;
+			case "name":
+				name = extract(object,"name");
+				break;
+			case "gender":
+				gender = extract(object,"gender")=="female"?true:false;
+				break;
+			case "nation":
+				nation = extract(object,"nation");
+				break;
+			case "dob":
+				String[] dob =extract(object,"dob").split("-");
+				year = Integer.parseInt(dob[0]);
+				month = Integer.parseInt(dob[1]);
+				day = Integer.parseInt(dob[2]);
+				break;
+			}
+		}
+		new Actor(name, gender, nation, year, month, day);
+	}
+	private static void movie(DataList<Pair<String, String>> object) throws Exception {
+		
+		for(int i=0; i<object.length();i++) {
+			switch(object.get(i).car()) {
+			case "type":
+				if(!(extract(object,"type").equals("movie")))
+					throw (new Exception("Non-Movie object was parsed by Movie method."));
+				break;
+			}
+		}
+	}
 }

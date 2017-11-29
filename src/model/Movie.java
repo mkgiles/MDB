@@ -27,11 +27,6 @@ public class Movie {
 		setDescription(description);
 		setPosterURL(posterURL);
 	}
-
-	public static void ndb(DataList<Pair<String, String>> object) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void viewMovie()
 	{

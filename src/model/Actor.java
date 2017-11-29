@@ -9,23 +9,17 @@ public class Actor {
 	private String name;
 	private int uid;
 	private LocalDate dob;
-	private int gender;
+	private Boolean gender;
 	private String nationality;
 	
-	public Actor(String name, int gender, String nationality, int yearNum, int monthNum, int dayNum)
+	public Actor(String name, Boolean gender, String nationality, int yearNum, int monthNum, int dayNum)
 	{
 		this.uid = uuid;
 		uuid = uuid+1;
 		setName(name);
-		setGender(gender);	
+		setGender(gender);
 		setNationality(nationality);
 		setDob(yearNum, monthNum, dayNum);
-	}
-	
-
-	public static void ndb(DataList<Pair<String, String>> object) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void viewActor()
@@ -39,7 +33,7 @@ public class Actor {
 	{
 		 this.name = name;
 	}
-	public void setGender(int gender)
+	public void setGender(Boolean gender)
 	{
 		 this.gender = gender;
 	}
@@ -58,7 +52,7 @@ public class Actor {
 	{
 		return name;
 	}
-	public int getGender()
+	public Boolean getGender()
 	{
 		return gender;
 	}
