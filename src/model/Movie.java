@@ -31,11 +31,6 @@ public class Movie {
 		setPosterURL(posterURL);
 		setDor(yearNum, monthNum, dayNum);
 	}
-
-	public static void ndb(DataList<Pair<String, String>> object) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void viewMovie()
 	{
