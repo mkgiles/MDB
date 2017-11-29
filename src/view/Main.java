@@ -57,6 +57,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 			
             if(buttonPressed.equals("viewMovies"))
             {
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
             	try {
 					changeScene("View Movies", "ViewMovies.fxml");
 				} catch (IOException e) {
@@ -66,6 +68,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             }
             if(buttonPressed.equals("viewActors"))
             {
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
             	try {
 					changeScene("View Actors", "ViewActors.fxml");
 				} catch (IOException e) {
@@ -75,6 +79,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             }
             if(buttonPressed.equals("addMovies"))
             {
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
             	try {
 					changeScene("Add Movies", "AddMovies.fxml");
 				} catch (IOException e) {
@@ -84,6 +90,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             }
             if(buttonPressed.equals("addActors"))
             {
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
             	try {
 					changeScene("View Actors", "AddActors.fxml");
 				} catch (IOException e) {
@@ -94,10 +102,15 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             
             if(buttonPressed.equals("closeScene"))
             {
-            	
             		Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
             		stage.close();
-            		System.out.println("Out now");
+            		
+            		try {
+    					changeScene("MDB (Written by Conor Giles and Andrew Bates)", "MDB.fxml");
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				};
             }
             
             if(buttonPressed.equals("GTLT")) 
