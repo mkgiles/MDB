@@ -14,24 +14,35 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 
+
 public class Main extends Application implements EventHandler<ActionEvent> {
-
+	
+	Stage window;
+	Scene scene1, scene2, scene3, scene4, scene5;
+	Boolean closeNS = false;
+	Stage previousStage;
+	FXMLLoader loader;
+	
 	@Override
-	public void start(Stage primaryStage) {
-
-		
+	public void start(Stage primaryStage) {		
 		try {
-			Pane root =
-			FXMLLoader.load(getClass().getResource("MDB.fxml"));
-			Scene s=new Scene(root,600,400);
-			primaryStage.setMinWidth(610);
-			primaryStage.setMinHeight(440);
-			primaryStage.setMaxWidth(610);
-			primaryStage.setMaxHeight(440);
-			primaryStage.setScene(s);
-			primaryStage.setTitle("MDB (Written by Conor Giles and Andrew Bates)");
-			primaryStage.show();
-			}catch(IOException e){}
+			window = primaryStage;
+			loader = new FXMLLoader(getClass().getResource("MDB.fxml"));
+			
+			Pane root =  (Pane)loader.load();
+			scene1 =new Scene(root,600,400);	
+			
+			window.setMinWidth(610);
+			window.setMinHeight(440);
+			window.setMaxWidth(610);
+			window.setMaxHeight(440);
+			window.setScene(scene1);
+			window.setTitle("MDB (Written by Conor Giles and Andrew Bates)");
+			window.show();
+			setPreviousStage(window);
+			
+			}
+		catch(IOException e){}
 		}
 
 	public static void main(String[] args) {
@@ -42,16 +53,86 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
             
-			System.out.println("Button pressed " + ((Button) event.getSource()).getId());
 			String buttonPressed = ((Button) event.getSource()).getId();
-			System.out.println(buttonPressed);
 			
             if(buttonPressed.equals("viewMovies"))
             {
-            	System.out.println("Let's watch some movies");
+            	try {
+					changeScene("View Movies", "ViewMovies.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
-{
-	}
+            if(buttonPressed.equals("viewActors"))
+            {
+            	try {
+					changeScene("View Actors", "ViewActors.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            if(buttonPressed.equals("addMovies"))
+            {
+            	try {
+					changeScene("Add Movies", "AddMovies.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				};
+            }
+            if(buttonPressed.equals("addActors"))
+            {
+            	try {
+					changeScene("View Actors", "AddActors.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            
+            if(buttonPressed.equals("closeScene"))
+            {
+            	
+            		Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+            		stage.close();
+            		System.out.println("Out now");
+            }
+            
+            if(buttonPressed.equals("GTLT")) 
+			{
+				Button btn = ((Button) event.getSource());
+				String buttonText = ((Button) event.getSource()).getText();
+				if(buttonText.equals("<")) 
+				{
+				btn.setText(">");
+				}
+				else 
+				{
+					btn.setText("<");
+				}
+			}
+            }
+	
+			
+	
+	public void setPreviousStage(Stage stage) 
+	{
+		
+		previousStage = stage;
 	}
 	
+	public void changeScene(String title, String fxml) throws IOException
+	{
+		loader = new FXMLLoader(getClass().getResource(fxml));
+		
+		Pane root =  (Pane)loader.load();
+		Scene scene =new Scene(root,600,400);
+		
+    	Stage stage = new Stage();
+    	stage.setTitle(title);
+    	stage.setScene(scene);
+    	stage.show();
+	}
 }

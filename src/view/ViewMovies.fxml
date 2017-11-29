@@ -20,10 +20,10 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="186.0">
                <children>
                   <Label layoutX="25.0" layoutY="23.0" text="Choose an option!" />
-                  <Button fx:id="viewMovies" layoutX="24.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleViewMovie" prefHeight="25.0" prefWidth="100.0" text="Go Back" />
-                  <Button fx:id="viewActors" layoutX="24.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleViewActor" prefHeight="25.0" prefWidth="100.0" text="View Actors" />
-                  <Button fx:id="addMovies" layoutX="24.0" layoutY="138.0" mnemonicParsing="false" onAction="#handleAddMovie" prefHeight="25.0" prefWidth="100.0" text="Add Movies" />
-                  <Button fx:id="addActors" layoutX="24.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleAddActors" prefHeight="25.0" prefWidth="100.0" text="Add Actors" />
+                  <Button fx:id="closeScene" layoutX="24.0" layoutY="88.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="100.0" text="Go Back" />
+                  <Button fx:id="viewActors" layoutX="24.0" layoutY="113.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="100.0" text="View Actors" />
+                  <Button fx:id="addMovies" layoutX="24.0" layoutY="138.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="100.0" text="Add Movies" />
+                  <Button fx:id="addActors" layoutX="24.0" layoutY="163.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="100.0" text="Add Actors" />
                   <ImageView fitHeight="119.0" fitWidth="118.0" layoutX="29.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@witlogo.JPG" />
@@ -57,7 +57,7 @@
                   <CheckBox layoutX="175.0" layoutY="247.0" mnemonicParsing="false" text="Search By" />
                   <TextField layoutX="264.0" layoutY="206.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
                   <CheckBox layoutX="175.0" layoutY="268.0" mnemonicParsing="false" text="Search By" />
-                  <Button layoutX="315.0" layoutY="235.0" mnemonicParsing="false" text="&lt;" />
+                  <Button fx:id="GTLT" layoutX="315.0" layoutY="235.0" mnemonicParsing="false" onAction="#handle" text="&lt;" />
                   <TextField layoutX="360.0" layoutY="235.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
                   <Label layoutX="263.0" layoutY="239.0" prefHeight="17.0" prefWidth="52.0" text="Birthday" />
                   <TextField layoutX="264.0" layoutY="264.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />
