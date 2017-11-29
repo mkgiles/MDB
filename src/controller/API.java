@@ -25,14 +25,17 @@ public class API {
 	
 	
 	//Used to get Movies through the use of UID's? 
-	public static void getMovie(int actorUID) 
+	public static Movie getMovie(String title) 
 	{
-		
+		return movies.get(p -> p.getTitle()==title);
 	}
 	
 	//Used to get Actor through the use of Names.
 	public static Actor getActor(String name) 
 	{
-		return actors.get(p -> {return p.getName()==name;});
+		return actors.get(p -> p.getName()==name);
+	}
+	public static void addRole(Link<Actor, String, Movie> link) {
+		roles.append(link);
 	}
 }

@@ -15,12 +15,8 @@ public class Movie {
 	private String genre;
 	private String description;
 	private String posterURL;
-	
-	public Movie() {
-		// TODO Auto-generated constructor stub
-	}
 
-	Movie(String title, int runningTime, String genre, String description, String posterURL, int yearNum, int monthNum, int dayNum)
+	public Movie(String title, int runningTime, String genre, String description, String posterURL, int yearNum, int monthNum, int dayNum)
 	{
 		this.uid = uuid;
 		uuid = uuid+1;

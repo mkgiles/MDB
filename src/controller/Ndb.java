@@ -29,6 +29,7 @@ public class Ndb {
 				}
 				convert(object);
 				args = "";
+				file.mark(1024);
 			}
 			line = file.readLine();
 		}
@@ -44,13 +45,17 @@ public class Ndb {
 			movie(object);
 		}
 		else if(type.cdr().equals("reference")) {
-			reference(object);
+			role(object);
 		}
 		else {
 			throw(new Exception("Invalid type."));
 		}
 	}
-	private static void reference(DataList<Pair<String, String>> object) {
+	private static void role(DataList<Pair<String, String>> object) {
+		Actor actor = API.getActor(extract(object,"actor"));
+		Movie movie = API.getMovie(extract(object, "movie"));
+		String role = extract(object, "role");
+		API.addRole(new Link<Actor, String, Movie>(actor, movie, role));
 		
 	}
 	private static String extract(DataList<Pair<String, String>> object, String field) {
@@ -60,40 +65,31 @@ public class Ndb {
 		String name = "", nation = "";
 		int year = 0, month = 0, day = 0;
 		Boolean gender = false;
-		for(int i=0; i<object.length();i++) {
-			switch(object.get(i).car()) {
-			case "type":
-				if(!(extract(object,"type").equals("actor")))
-					throw (new Exception("Non-Actor object was parsed by Actor method."));
-				break;
-			case "name":
-				name = extract(object,"name");
-				break;
-			case "gender":
-				gender = extract(object,"gender")=="female"?true:false;
-				break;
-			case "nation":
-				nation = extract(object,"nation");
-				break;
-			case "dob":
-				String[] dob =extract(object,"dob").split("-");
-				year = Integer.parseInt(dob[0]);
-				month = Integer.parseInt(dob[1]);
-				day = Integer.parseInt(dob[2]);
-				break;
-			}
-		}
-		new Actor(name, gender, nation, year, month, day);
+		if(!(extract(object,"type").equals("actor")))
+			throw (new Exception("Non-Actor object was parsed by Actor method."));
+		name = extract(object,"name");
+		gender = extract(object,"gender")=="female"?true:false;
+		nation = extract(object,"nation");
+		String[] dob =extract(object,"dob").split("-");
+		year = Integer.parseInt(dob[0]);
+		month = Integer.parseInt(dob[1]);
+		day = Integer.parseInt(dob[2]);
+		API.addActor(new Actor(name, gender, nation, year, month, day));
 	}
 	private static void movie(DataList<Pair<String, String>> object) throws Exception {
-		
-		for(int i=0; i<object.length();i++) {
-			switch(object.get(i).car()) {
-			case "type":
-				if(!(extract(object,"type").equals("movie")))
-					throw (new Exception("Non-Movie object was parsed by Movie method."));
-				break;
-			}
-		}
+		String name = "", genre = "", description = "", posterURL = "";
+		int runtime = 0, year = 0, month = 0, day = 0;
+		if(!(extract(object,"type").equals("movie")))
+			throw (new Exception("Non-Movie object was parsed by Movie method."));
+		name = extract(object, "name");
+		runtime = Integer.parseInt(extract(object,"runtime"));
+		genre = extract(object, "genre");
+		description = extract(object, "description");
+		posterURL = extract(object, "poster");
+		String[] release =extract(object,"dob").split("-");
+		year = Integer.parseInt(release[0]);
+		month = Integer.parseInt(release[1]);
+		day = Integer.parseInt(release[2]);
+		API.addMovie(new Movie(name, runtime, genre, description, posterURL, year, month, day));
 	}
 }
