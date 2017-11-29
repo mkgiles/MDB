@@ -35,36 +35,36 @@
                <children>
                   <ListView layoutX="24.0" layoutY="36.0" prefHeight="340.0" prefWidth="133.0" />
                   <ScrollBar layoutX="150.0" layoutY="36.0" orientation="VERTICAL" prefHeight="340.0" prefWidth="14.0" />
-                  <ListView layoutX="173.0" layoutY="257.0" prefHeight="119.0" prefWidth="262.0" />
-                  <TitledPane animated="false" layoutX="173.0" layoutY="14.0" prefHeight="109.0" prefWidth="262.0" text="Movie">
+                  <ListView layoutX="173.0" layoutY="305.0" prefHeight="119.0" prefWidth="262.0" />
+                  <TitledPane animated="false" layoutX="173.0" layoutY="14.0" prefHeight="191.0" prefWidth="262.0" text="Movie">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="191.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="260.0">
                            <children>
-                              <Label layoutX="18.0" layoutY="11.0" text="Name:" />
-                              <Label layoutX="15.0" layoutY="28.0" text="Gender:" />
-                              <Label layoutX="7.0" layoutY="48.0" text="Nationality" />
-                              <Label layoutY="65.0" text="Date Of Birth:" />
-                              <Label layoutX="177.0" layoutY="11.0" text="Label" />
-                              <Label layoutX="177.0" layoutY="28.0" text="Label" />
-                              <Label layoutX="177.0" layoutY="48.0" text="Label" />
-                              <Label layoutX="177.0" layoutY="65.0" text="Label" />
+                              <Label layoutX="6.0" layoutY="83.0" text="Title:" />
+                              <Label layoutX="6.0" layoutY="100.0" text="Running Time:" />
+                              <Label layoutX="6.0" layoutY="117.0" text="Genre:" />
+                              <Label layoutX="10.0" layoutY="134.0" text="Description:" />
+                              <Label layoutX="177.0" layoutY="83.0" text="Label" />
+                              <Label layoutX="177.0" layoutY="100.0" text="Label" />
+                              <Label layoutX="177.0" layoutY="117.0" text="Label" />
+                              <Label layoutX="177.0" layoutY="134.0" text="Label" />
                            </children>
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <ScrollBar layoutX="428.0" layoutY="257.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="14.0" />
-                  <CheckBox layoutX="175.0" layoutY="160.0" mnemonicParsing="false" text="Search By" />
-                  <CheckBox layoutX="175.0" layoutY="190.0" mnemonicParsing="false" text="Search By" />
-                  <TextField layoutX="263.0" layoutY="160.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
-                  <CheckBox layoutX="175.0" layoutY="220.0" mnemonicParsing="false" text="Search By" />
-                  <Button layoutX="320.0" layoutY="190.0" mnemonicParsing="false" text="&lt;" />
-                  <TextField layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
-                  <Label layoutX="262.0" layoutY="190.0" prefHeight="17.0" prefWidth="52.0" text="Date of Birth" />
-                  <TextField layoutX="263.0" layoutY="220.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />
+                  <ScrollBar layoutX="424.0" layoutY="305.0" orientation="VERTICAL" prefHeight="92.0" prefWidth="14.0" />
+                  <CheckBox layoutX="175.0" layoutY="210.0" mnemonicParsing="false" text="Search By" />
+                  <CheckBox layoutX="175.0" layoutY="247.0" mnemonicParsing="false" text="Search By" />
+                  <TextField layoutX="264.0" layoutY="206.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
+                  <CheckBox layoutX="175.0" layoutY="268.0" mnemonicParsing="false" text="Search By" />
+                  <Button layoutX="315.0" layoutY="235.0" mnemonicParsing="false" text="&lt;" />
+                  <TextField layoutX="360.0" layoutY="235.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
+                  <Label layoutX="263.0" layoutY="239.0" prefHeight="17.0" prefWidth="52.0" text="Birthday" />
+                  <TextField layoutX="264.0" layoutY="264.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />
                   <Label contentDisplay="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="17.0" prefWidth="133.0" text="Movies on system:" textAlignment="CENTER" />
-                  <Label layoutX="175.0" layoutY="240.0" text="Results:" />
-                  <TextField layoutX="385.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
-                  <TextField layoutX="410.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
+                  <Label layoutX="173.0" layoutY="288.0" text="Results:" />
+                  <TextField layoutX="385.0" layoutY="235.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
+                  <TextField layoutX="412.0" layoutY="235.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
                </children>
             </AnchorPane>
         </items>
