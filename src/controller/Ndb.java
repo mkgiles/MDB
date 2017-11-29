@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 import model.*;
 import structures.*;
@@ -46,7 +44,7 @@ public class Ndb {
 		else if(type.equals("movie")) {
 			movie(object);
 		}
-		else if(type.equals("reference")) {
+		else if(type.equals("role")) {
 			role(object);
 		}
 		else {
@@ -54,10 +52,10 @@ public class Ndb {
 		}
 	}
 	private static void role(DataList<Pair<String, String>> object) {
-		Actor actor = API.getActor(extract(object,"actor"));
-		Movie movie = API.getMovie(extract(object, "movie"));
-		String role = extract(object, "role");
-		API.addRole(new Link<Actor, String, Movie>(actor, movie, role));
+		Actor actor = API.getActor(extract(object,"actor").replace("_", " "));
+		Movie movie = API.getMovie(extract(object, "movie").replace("_", " "));
+		String role = extract(object, "role").replace("_", " ");
+		API.addRole(new Link<Actor, String, Movie>(actor, role, movie));
 		
 	}
 	private static String extract(DataList<Pair<String, String>> object, String field) {
@@ -117,6 +115,14 @@ public class Ndb {
 			file.write(" description=" + movie.getDescription().replace(" ", "_"));
 			file.write(" poster=" + movie.getPosterURL());
 			file.write(" release=" + movie.getDor().getYear() + "-" + movie.getDor().getMonthValue() + "-" + movie.getDor().getDayOfMonth());
+			file.newLine();
+		}
+		for(Node<Link<Actor,String,Movie>> temp = API.listRoles().getNode(0);temp!=null;temp=temp.next) {
+			Link<Actor,String,Movie> role = temp.data;
+			file.write("type=role");
+			file.write(" actor=" + role.source().getName().replace(" ", "_"));
+			file.write(" movie=" + role.dest().getTitle().replace(" ", "_"));
+			file.write(" role=" + role.path().replace(" ", "_"));
 			file.newLine();
 		}
 		file.close();

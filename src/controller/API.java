@@ -36,12 +36,21 @@ public class API {
 		return actors.get(p -> p.getName().equals(name));
 	}
 	public static void addRole(Link<Actor, String, Movie> link) {
-		roles.append(link);
+		if(roles==null)
+			roles=new DataList<Link<Actor,String,Movie>>(link);
+		else
+			roles.append(link);
 	}
 	public static DataList<Actor> listActors(){
 		return actors;
 	}
 	public static DataList<Movie> listMovies(){
 		return movies;
+	}
+	public static DataList<Link<Actor,String,Movie>> listRoles(){
+		return roles;
+	}
+	public static Link<Actor, String, Movie> getRole(int index){
+		return roles.get(index);
 	}
 }
