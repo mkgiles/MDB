@@ -8,6 +8,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -17,11 +19,16 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="186.0">
                <children>
-                  <Label layoutX="39.0" layoutY="23.0" text="Choose an option!" />
-                  <Button fx:id="viewMovies" layoutX="47.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleViewMovie" text="View Movies" />
-                  <Button fx:id="viewActors" layoutX="49.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleViewActor" text="Go Back" />
-                  <Button fx:id="addMovies" layoutX="48.0" layoutY="138.0" mnemonicParsing="false" onAction="#handleAddMovie" text="Add Movies" />
-                  <Button fx:id="addActors" layoutX="50.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleAddActors" text="Add Actors" />
+                  <Label layoutX="25.0" layoutY="23.0" text="Choose an option!" />
+                  <Button fx:id="viewMovies" layoutX="24.0" layoutY="88.0" mnemonicParsing="false" onAction="#handleViewMovie" prefHeight="25.0" prefWidth="100.0" text="View Movies" />
+                  <Button fx:id="viewActors" layoutX="24.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleViewActor" prefHeight="25.0" prefWidth="100.0" text="Go Back" />
+                  <Button fx:id="addMovies" layoutX="24.0" layoutY="138.0" mnemonicParsing="false" onAction="#handleAddMovie" prefHeight="25.0" prefWidth="100.0" text="Add Movies" />
+                  <Button fx:id="addActors" layoutX="24.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleAddActors" prefHeight="25.0" prefWidth="100.0" text="Add Actors" />
+                  <ImageView fitHeight="119.0" fitWidth="118.0" layoutX="29.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@witlogo.JPG" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="477.0">
@@ -46,20 +53,22 @@
                     </content>
                   </TitledPane>
                   <ScrollBar layoutX="428.0" layoutY="257.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="14.0" />
-                  <CheckBox layoutX="175.0" layoutY="138.0" mnemonicParsing="false" text="Search By" />
-                  <CheckBox layoutX="175.0" layoutY="167.0" mnemonicParsing="false" text="Search By" />
-                  <CheckBox layoutX="175.0" layoutY="191.0" mnemonicParsing="false" text="Search By" />
-                  <TextField layoutX="271.0" layoutY="163.0" prefHeight="25.0" prefWidth="166.0" promptText="Genre" />
-                  <TextField layoutX="358.0" layoutY="134.0" prefHeight="25.0" prefWidth="79.0" promptText="Minutes" />
-                  <Button layoutX="332.0" layoutY="134.0" mnemonicParsing="false" text="&lt;" />
-                  <Label layoutX="271.0" layoutY="138.0" prefHeight="17.0" prefWidth="52.0" text="Duration" />
-                  <CheckBox layoutX="175.0" layoutY="212.0" mnemonicParsing="false" text="Search By" />
-                  <Button layoutX="332.0" layoutY="187.0" mnemonicParsing="false" text="&lt;" />
-                  <TextField layoutX="358.0" layoutY="187.0" prefHeight="25.0" prefWidth="79.0" promptText="DD/MM/YY" />
-                  <Label layoutX="271.0" layoutY="191.0" prefHeight="17.0" prefWidth="52.0" text="Released" />
-                  <TextField layoutX="271.0" layoutY="208.0" prefHeight="25.0" prefWidth="166.0" promptText="Title" />
+                  <CheckBox layoutX="175.0" layoutY="130.0" mnemonicParsing="false" text="Search By" />
+                  <CheckBox layoutX="175.0" layoutY="160.0" mnemonicParsing="false" text="Search By" />
+                  <CheckBox layoutX="175.0" layoutY="190.0" mnemonicParsing="false" text="Search By" />
+                  <TextField layoutX="263.0" layoutY="160.0" prefHeight="25.0" prefWidth="175.0" promptText="Genre" />
+                  <TextField layoutX="358.0" layoutY="130.0" prefHeight="25.0" prefWidth="79.0" promptText="Minutes" />
+                  <Button layoutX="320.0" layoutY="130.0" mnemonicParsing="false" text="&lt;" />
+                  <Label layoutX="262.0" layoutY="130.0" prefHeight="17.0" prefWidth="50.0" text="Duration" />
+                  <CheckBox layoutX="175.0" layoutY="220.0" mnemonicParsing="false" text="Search By" />
+                  <Button layoutX="320.0" layoutY="190.0" mnemonicParsing="false" text="&lt;" />
+                  <TextField layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
+                  <Label layoutX="262.0" layoutY="190.0" prefHeight="17.0" prefWidth="52.0" text="Released" />
+                  <TextField layoutX="263.0" layoutY="220.0" prefHeight="25.0" prefWidth="174.0" promptText="Title" />
                   <Label contentDisplay="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="17.0" prefWidth="133.0" text="Actors on system:" textAlignment="CENTER" />
                   <Label layoutX="175.0" layoutY="240.0" text="Results:" />
+                  <TextField layoutX="385.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
+                  <TextField layoutX="410.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
                </children>
             </AnchorPane>
         </items>
