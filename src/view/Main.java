@@ -22,7 +22,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 		try {
 			Pane root =
 			FXMLLoader.load(getClass().getResource("MDB.fxml"));
-			Scene s=new Scene(root,400,400);
+			Scene s=new Scene(root,600,400);
+			primaryStage.setMinWidth(610);
+			primaryStage.setMinHeight(440);
+			primaryStage.setMaxWidth(610);
+			primaryStage.setMaxHeight(440);
 			primaryStage.setScene(s);
 			primaryStage.setTitle("MDB (Written by Conor Giles and Andrew Bates)");
 			primaryStage.show();

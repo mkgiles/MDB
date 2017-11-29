@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 import structures.DataList;
 import structures.Link;
 import structures.Pair;
@@ -9,6 +11,7 @@ public class Movie {
 	private int uid;
 	private String title;
 	private int runningTime;
+	private LocalDate dor;
 	private String genre;
 	private String description;
 	private String posterURL;
@@ -17,7 +20,7 @@ public class Movie {
 		// TODO Auto-generated constructor stub
 	}
 
-	Movie(String title, int runningTime, String genre, String description, String posterURL)
+	Movie(String title, int runningTime, String genre, String description, String posterURL, int yearNum, int monthNum, int dayNum)
 	{
 		this.uid = uuid;
 		uuid = uuid+1;
@@ -26,6 +29,7 @@ public class Movie {
 		setGenre(genre);
 		setDescription(description);
 		setPosterURL(posterURL);
+		setDor(yearNum, monthNum, dayNum);
 	}
 
 	public static void ndb(DataList<Pair<String, String>> object) {
@@ -60,6 +64,11 @@ public class Movie {
 		this.title = title;
 	}
 	
+	public void setDor(int yearNum, int monthNum, int dayNum)
+	{
+		this.dor = LocalDate.of(yearNum,monthNum, dayNum);
+	}
+	
 	//GETTERS//
 	public String getPosterURL()
 	{
@@ -81,5 +90,8 @@ public class Movie {
 	{
 		return title;
 	}
-
+	public LocalDate getDor()
+	{
+		return dor;
+	}
 }
