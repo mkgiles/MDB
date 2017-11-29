@@ -27,15 +27,21 @@ public class API {
 	//Used to get Movies through the use of UID's? 
 	public static Movie getMovie(String title) 
 	{
-		return movies.get(p -> p.getTitle()==title);
+		return movies.get(p -> p.getTitle().equals(title));
 	}
 	
 	//Used to get Actor through the use of Names.
 	public static Actor getActor(String name) 
 	{
-		return actors.get(p -> p.getName()==name);
+		return actors.get(p -> p.getName().equals(name));
 	}
 	public static void addRole(Link<Actor, String, Movie> link) {
 		roles.append(link);
+	}
+	public static DataList<Actor> listActors(){
+		return actors;
+	}
+	public static DataList<Movie> listMovies(){
+		return movies;
 	}
 }

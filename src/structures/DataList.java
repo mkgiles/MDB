@@ -13,12 +13,12 @@ public class DataList<T> {
 	}
 	//One element list.
 	public DataList(T data) {
-		head = new Node(data);
+		head = new Node<T>(data);
 		tail = head;
 	}
 	//Implements list which is a copy of a prior list with a new data item prefixed on.
 	public DataList(T data, DataList<T> list) {
-		head = new Node(data, copy(list));
+		head = new Node<T>(data, copy(list));
 	}
 	//Implements a list of fixed length containing nothing but a particular preset value.
 	public DataList(int length, T data) {
@@ -37,17 +37,18 @@ public class DataList<T> {
 	}
 	//Appends data to end of list.
 	public void append(T data) {
-		tail.next = new Node(tail, data);
+		tail.next = new Node<T>(tail, data);
+		tail = tail.next;
 	}
 	//Prepends data to start of list.
 	public void prepend(T data) {
-		Node<T> temp = new Node(data, this);
+		Node<T> temp = new Node<T>(data, this);
 		this.head = temp;
 	}
 	//Iterates through list to get length.
 	public int length() {
 		int i = 0;
-		for(Node<T> temp = head;head!=null;head=head.next,i++);
+		for(Node<T> temp = head;temp!=null;temp=temp.next,i++);
 		return i;
 	}
 	//Inserts data after specified index.
@@ -75,7 +76,7 @@ public class DataList<T> {
 		return null;
 	}
 	//gets the Node at a given index.
-	private Node<T> getNode(int index) {
+	public Node<T> getNode(int index) {
 		Node<T> temp = head;
 		for(int i = 0; i<index && temp!=null; i++, temp = temp.next);
 		if(temp!=null)
