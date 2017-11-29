@@ -30,7 +30,7 @@ public class API {
 		
 	}
 	
-	//Used to get Actor through the use of UID's?
+	//Used to get Actor through the use of Names.
 	public static Actor getActor(String name) 
 	{
 		return actors.get(p -> {return p.getName()==name;});
