@@ -1,5 +1,7 @@
 package structures;
 
+import java.lang.reflect.Array;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class DataList<T> {
@@ -26,19 +28,67 @@ public class DataList<T> {
 		for(int i = 1; i<length; i++)
 			this.append(data);
 	}
+	private static <K> DataList<K> mergesort(DataList<K> list, BiPredicate<K,K> p){
+		DataList<K> sorted;
+		if(list.length() == 0 || list.length() == 1)
+			return list;
+		int midpoint = list.length()/2;
+		DataList<K> left=new DataList<K>(), right = new DataList<K>();
+		for(int i = 0; i<midpoint;i++)
+			left.append(list.get(i));
+		for(int i = midpoint;i<list.length();i++)
+			right.append(list.get(i));
+		left = mergesort(left, p);
+		right = mergesort(right, p);
+		sorted = merge(left, right, p);
+		return sorted;
+	}
+	private static <K> DataList<K> merge(DataList<K> left, DataList<K> right, BiPredicate<K,K> p) {
+		DataList<K> merged = new DataList<K>();
+		int i=0,j=0;
+		for(;i<left.length()&&j<right.length();) {
+			if(p.test(left.get(i), right.get(j))) 
+				merged.append(left.get(i++));
+			else
+				merged.append(right.get(j++));
+		}
+		if(i<j)
+			merged.append(left.getSubList(i));
+		else
+			merged.append(right.getSubList(j));
+		return merged;
+	}
+	public DataList<T> sort(BiPredicate<T,T> p){
+		return mergesort(this, p);
+	}
 	//Safely copies a list to prevent possible reference issues
-	public DataList<T> copy(DataList<T> list){
-		DataList<T> temp = new DataList<T>(list.head.data);
-		Node<T> head = list.head.next;
+	public static <K> DataList<K> copy(DataList<K> list){
+		if(list.head == null)
+			return new DataList<K>();
+		DataList<K> temp = new DataList<K>(list.head.data);
+		Node<K> head = list.head.next;
 		while(head != null) {
 			temp.append(head.data);
+			head=head.next;
 		}
 		return temp;
 	}
 	//Appends data to end of list.
 	public void append(T data) {
-		tail.next = new Node<T>(tail, data);
-		tail = tail.next;
+		if(tail == null) {
+			tail = new Node<T>(data);
+			if(head == null)
+				head = tail;
+		}
+		else {
+			tail.next = new Node<T>(tail, data);
+			tail = tail.next;
+		}
+	}
+	public void append(DataList<T> list) {
+		DataList<T> temp = copy(list);
+		this.tail.next = temp.head;
+		temp.head.prev = this.tail; 
 	}
 	//Prepends data to start of list.
 	public void prepend(T data) {
@@ -82,6 +132,11 @@ public class DataList<T> {
 		if(temp!=null)
 			return temp;
 		return null;
+	}
+	public DataList<T> getSubList(int index){
+		DataList<T> sublist = copy(this);
+		sublist.head = sublist.getNode(index);
+		return sublist;
 	}
 	//Gets the element at a given index.
 	public T get(int index) {

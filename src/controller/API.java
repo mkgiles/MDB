@@ -50,7 +50,7 @@ public class API {
 	public static DataList<Link<Actor,String,Movie>> listRoles(){
 		return roles;
 	}
-	public static Link<Actor, String, Movie> getRole(int index){
-		return roles.get(index);
+	public static Link<Actor, String, Movie> getRole(String role){
+		return roles.get(p -> p.path().equals(role));
 	}
 }
