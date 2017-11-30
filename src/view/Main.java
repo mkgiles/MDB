@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Checkbox;
 import java.io.IOException;
 
 import controller.API;
@@ -40,9 +41,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private Label actorNationality;
 	
 	@FXML private Label movieTitle;
+	@FXML private Label movieDor;
 	@FXML private Label movieRunningTime;
 	@FXML private Label movieGenre;
 	@FXML private Label movieDescription;
+	
+	@FXML private Checkbox actorNameCB;
+	@FXML private Checkbox actorDobCB;
+	@FXML private Checkbox actorNationalityCB;
+	
+	@FXML private Checkbox movieTitleCB;
+	@FXML private Checkbox movieDurationCB;
+	@FXML private Checkbox movieGenreCB;
+	@FXML private Checkbox movieDorCB;
 	
 	@Override
 	public void start(Stage primaryStage) {		
@@ -162,14 +173,21 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorSearchMovies.getItems().addAll("List Object");
 			}
             if(buttonPressed.equals("dispActorSearch")) 
-			{	
+			{	           	
+            	//actorNameCB
+            	//actorDobCB;
+            	//actorNationalityCB;
+            	
             	movieSearchActors.getItems().addAll("List Object");
 			}
             if(buttonPressed.equals("inspectMovie"))
             		{
             	String currentSelection = (String) listviewMovies.getSelectionModel().getSelectedItem();
             	System.out.println(currentSelection);
+            	//Put function here to match title in selection with title of movie.
+            	//Fill other fields with other criteria (Title, Running Time, Genre.)
             	movieTitle.setText(currentSelection);
+            	movieDor.setText(currentSelection);
             	movieRunningTime.setText(currentSelection);
             	movieGenre.setText(currentSelection);
             	movieDescription.setText(currentSelection);
@@ -177,6 +195,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if(buttonPressed.equals("inspectActor"))
     		{
             	String currentSelection = (String) listviewActors.getSelectionModel().getSelectedItem();
+            	//Put function here to match name in selection with name of actor.
+            	//Fill other fields with other criteria (Name, Gender, DoB, etc.)
             	System.out.println(currentSelection);
             	actorName.setText(currentSelection);
             	actorGender.setText(currentSelection);
