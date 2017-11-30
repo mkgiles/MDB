@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import model.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private ListView listviewActors;
 	@FXML private ListView actorSearchMovies;
 	@FXML private ListView movieSearchActors;
+	
+	@FXML private Label actorName;
+	@FXML private Label actorDob;
+	@FXML private Label actorGender;
+	@FXML private Label actorNationality;
+	
+	@FXML private Label movieTitle;
+	@FXML private Label movieRunningTime;
+	@FXML private Label movieGenre;
+	@FXML private Label movieDescription;
 	
 	@Override
 	public void start(Stage primaryStage) {		
@@ -64,7 +75,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
             
 			String buttonPressed = ((Button) event.getSource()).getId();
-			
             if(buttonPressed.equals("viewMovies"))
             {
             	
@@ -155,6 +165,24 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 			{	
             	movieSearchActors.getItems().addAll("List Object");
 			}
+            if(buttonPressed.equals("inspectMovie"))
+            		{
+            	String currentSelection = (String) listviewMovies.getSelectionModel().getSelectedItem();
+            	System.out.println(currentSelection);
+            	movieTitle.setText(currentSelection);
+            	movieRunningTime.setText(currentSelection);
+            	movieGenre.setText(currentSelection);
+            	movieDescription.setText(currentSelection);
+            		}
+            if(buttonPressed.equals("inspectActor"))
+    		{
+            	String currentSelection = (String) listviewActors.getSelectionModel().getSelectedItem();
+            	System.out.println(currentSelection);
+            	actorName.setText(currentSelection);
+            	actorGender.setText(currentSelection);
+            	actorDob.setText(currentSelection);
+            	actorNationality.setText(currentSelection);
+    		}
             
             
             }
@@ -171,6 +199,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 		Pane root =  (Pane)loader.load();
 		Scene scene =new Scene(root,600,400);	
     	Stage stage = new Stage();
+    	stage.setMinWidth(610);
+		stage.setMinHeight(440);
+		stage.setMaxWidth(610);
+		stage.setMaxHeight(440);
     	stage.setTitle(title);
     	stage.setScene(scene);
     	stage.show();   	

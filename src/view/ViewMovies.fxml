@@ -42,10 +42,10 @@
                               <Label layoutX="6.0" layoutY="100.0" text="Running Time:" />
                               <Label layoutX="6.0" layoutY="117.0" text="Genre:" />
                               <Label layoutX="10.0" layoutY="134.0" text="Description:" />
-                              <Label layoutX="177.0" layoutY="83.0" text="Label" />
-                              <Label layoutX="177.0" layoutY="100.0" text="Label" />
-                              <Label layoutX="177.0" layoutY="117.0" text="Label" />
-                              <Label layoutX="177.0" layoutY="134.0" text="Label" />
+                              <Label fx:id="movieTitle" layoutX="177.0" layoutY="83.0" text="Label" />
+                              <Label fx:id="movieRunningTime" layoutX="177.0" layoutY="100.0" text="Label" />
+                              <Label fx:id="movieGenre" layoutX="177.0" layoutY="117.0" text="Label" />
+                              <Label fx:id="movieDescription" layoutX="177.0" layoutY="134.0" text="Label" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -63,6 +63,7 @@
                   <TextField layoutX="412.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
                   <Button fx:id="dispActorSearch" layoutX="263.0" layoutY="277.0" mnemonicParsing="false" onAction="#handle" text="Search" />
                   <Button fx:id="showMovieList" layoutX="24.0" layoutY="11.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Display Movies" />
+                  <Button fx:id="inspectMovie" layoutX="24.0" layoutY="372.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Inspect Movie" />
                </children>
             </AnchorPane>
         </items>
