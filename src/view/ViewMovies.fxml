@@ -4,7 +4,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -33,10 +32,9 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="477.0">
                <children>
-                  <ListView layoutX="24.0" layoutY="36.0" prefHeight="340.0" prefWidth="133.0" />
-                  <ScrollBar layoutX="150.0" layoutY="36.0" orientation="VERTICAL" prefHeight="340.0" prefWidth="14.0" />
+                  <ListView fx:id="listview" layoutX="24.0" layoutY="36.0" prefHeight="340.0" prefWidth="133.0" />
                   <ListView layoutX="173.0" layoutY="305.0" prefHeight="119.0" prefWidth="262.0" />
-                  <TitledPane animated="false" layoutX="173.0" layoutY="14.0" prefHeight="191.0" prefWidth="262.0" text="Movie">
+                  <TitledPane animated="false" layoutX="173.0" layoutY="2.0" prefHeight="176.0" prefWidth="262.0" text="Movie">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="260.0">
                            <children>
@@ -52,19 +50,19 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <ScrollBar layoutX="424.0" layoutY="305.0" orientation="VERTICAL" prefHeight="92.0" prefWidth="14.0" />
-                  <CheckBox layoutX="175.0" layoutY="210.0" mnemonicParsing="false" text="Search By" />
-                  <CheckBox layoutX="175.0" layoutY="247.0" mnemonicParsing="false" text="Search By" />
-                  <TextField layoutX="264.0" layoutY="206.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
-                  <CheckBox layoutX="175.0" layoutY="268.0" mnemonicParsing="false" text="Search By" />
-                  <Button fx:id="GTLT" layoutX="315.0" layoutY="235.0" mnemonicParsing="false" onAction="#handle" text="&lt;" />
-                  <TextField layoutX="360.0" layoutY="235.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
-                  <Label layoutX="263.0" layoutY="239.0" prefHeight="17.0" prefWidth="52.0" text="Birthday" />
-                  <TextField layoutX="264.0" layoutY="264.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />
-                  <Label contentDisplay="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="17.0" prefWidth="133.0" text="Movies on system:" textAlignment="CENTER" />
+                  <CheckBox layoutX="175.0" layoutY="195.0" mnemonicParsing="false" text="Search By" />
+                  <CheckBox layoutX="175.0" layoutY="232.0" mnemonicParsing="false" text="Search By" />
+                  <TextField layoutX="264.0" layoutY="191.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
+                  <CheckBox layoutX="175.0" layoutY="253.0" mnemonicParsing="false" text="Search By" />
+                  <Button fx:id="GTLT" layoutX="315.0" layoutY="220.0" mnemonicParsing="false" onAction="#handle" text="&lt;" />
+                  <TextField layoutX="360.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
+                  <Label layoutX="263.0" layoutY="224.0" prefHeight="17.0" prefWidth="52.0" text="Birthday" />
+                  <TextField layoutX="264.0" layoutY="249.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />
                   <Label layoutX="173.0" layoutY="288.0" text="Results:" />
-                  <TextField layoutX="385.0" layoutY="235.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
-                  <TextField layoutX="412.0" layoutY="235.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
+                  <TextField layoutX="385.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
+                  <TextField layoutX="412.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
+                  <Button layoutX="263.0" layoutY="277.0" mnemonicParsing="false" text="Search" />
+                  <Button fx:id="showMovieList" layoutX="23.0" layoutY="9.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Display Movies" />
                </children>
             </AnchorPane>
         </items>

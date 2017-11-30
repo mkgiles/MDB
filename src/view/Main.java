@@ -4,12 +4,16 @@ import java.io.IOException;
 
 import controller.API;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import model.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
@@ -22,6 +26,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	Boolean closeNS = false;
 	Stage previousStage;
 	FXMLLoader loader;
+	Scene currentScene;
+	
+	@FXML private ListView listview;
 	
 	@Override
 	public void start(Stage primaryStage) {		
@@ -57,14 +64,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 			
             if(buttonPressed.equals("viewMovies"))
             {
+            	
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
         		stage.close();
             	try {
 					changeScene("View Movies", "ViewMovies.fxml");
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}        	
             }
             if(buttonPressed.equals("viewActors"))
             {
@@ -126,9 +135,20 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					btn.setText("<");
 				}
 			}
+            if(buttonPressed.equals("showMovieList")) 
+			{	
+            	populateListView();
+			}
+            
+
+            
+            
             }
 	
-			
+    public void populateListView()
+    {
+    	listview.getItems().addAll("List Object");
+    }
 	
 	public void setPreviousStage(Stage stage) 
 	{
@@ -139,13 +159,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	public void changeScene(String title, String fxml) throws IOException
 	{
 		loader = new FXMLLoader(getClass().getResource(fxml));
-		
 		Pane root =  (Pane)loader.load();
-		Scene scene =new Scene(root,600,400);
-		
+		Scene scene =new Scene(root,600,400);	
     	Stage stage = new Stage();
     	stage.setTitle(title);
     	stage.setScene(scene);
-    	stage.show();
+    	stage.show();   	
 	}
 }
