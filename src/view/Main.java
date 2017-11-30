@@ -28,7 +28,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	FXMLLoader loader;
 	Scene currentScene;
 	
-	@FXML private ListView listview;
+	@FXML private ListView listviewMovies;
+	@FXML private ListView listviewActors;
+	@FXML private ListView actorSearchMovies;
+	@FXML private ListView movieSearchActors;
 	
 	@Override
 	public void start(Stage primaryStage) {		
@@ -137,18 +140,24 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 			}
             if(buttonPressed.equals("showMovieList")) 
 			{	
-            	populateListView();
+            	listviewMovies.getItems().addAll("List Object");
 			}
             
-
+            if(buttonPressed.equals("showActorList")) 
+			{	
+            	listviewActors.getItems().addAll("List Object");
+			}
+            if(buttonPressed.equals("dispMovieSearch")) 
+			{	
+            	actorSearchMovies.getItems().addAll("List Object");
+			}
+            if(buttonPressed.equals("dispActorSearch")) 
+			{	
+            	movieSearchActors.getItems().addAll("List Object");
+			}
             
             
             }
-	
-    public void populateListView()
-    {
-    	listview.getItems().addAll("List Object");
-    }
 	
 	public void setPreviousStage(Stage stage) 
 	{
