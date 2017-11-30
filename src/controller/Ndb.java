@@ -24,7 +24,6 @@ public class Ndb {
 				String[] params = args.split("\\s+");
 				DataList<Pair<String,String>> object = new DataList<Pair<String, String>>(new Pair<String,String>(params[0].split("=")[0],params[0].split("=")[1]));
 				for(int i=1;i<params.length;i++) {
-					System.out.println(params[i]);
 					Pair<String, String> temp = new Pair<String, String>(params[i].split("=")[0],params[i].split("=")[1]);
 					object.append(temp);
 				}

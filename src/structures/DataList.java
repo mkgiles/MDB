@@ -3,6 +3,7 @@ package structures;
 import java.lang.reflect.Array;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
+import java.util.function.Function;
 
 public class DataList<T> {
 	//List is a doubly linked list.
@@ -146,5 +147,36 @@ public class DataList<T> {
 	//Overwrites the node at a given index.
 	public void set(int index, T data) {
 		getNode(index).data = data;
+	}
+	public void drop(int index) {
+		Node<T> node = getNode(index);
+		node.prev.next = node.next;
+		node.next.prev = node.prev;
+	}
+	public void drop(Predicate<T> p) {
+		for(Node<T> temp = head; temp != null; temp = temp.next) {
+			if(p.test(temp.data)) {
+				temp.next.prev = temp.prev;
+				temp.prev.next = temp.next;
+			}
+		}
+	}
+	public DataList<T> getSubList(Predicate<T> p){
+		DataList<T> temp = copy(this);
+		for(Node<T> node = temp.head; node != null; node = node.next) {
+			if(!p.test(node.data)) {
+				node.next.prev = node.prev;
+				node.prev.next = node.next;
+			}
+		}
+		return temp;
+	}
+	public <R> DataList<R> filter(Function<T, R> f){
+		DataList<T> temp = copy(this);
+		DataList<R> result = new DataList<R>();
+		for(Node<T> node = temp.head; node!=null; node=node.next) {
+			result.append(f.apply(node.data));
+		}
+		return result;
 	}
 }

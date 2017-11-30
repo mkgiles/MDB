@@ -53,4 +53,21 @@ public class API {
 	public static Link<Actor, String, Movie> getRole(String role){
 		return roles.get(p -> p.path().equals(role));
 	}
+	public static void dropActor(String name) {
+		roles.drop(p -> p.source().equals(getActor(name)));
+		actors.drop(p -> p.getName().equals(name));
+	}
+	public static void dropMovie(String title) {
+		roles.drop(p -> p.dest().equals(getMovie(title)));
+		movies.drop(p -> p.getTitle().equals(title));
+	}
+	public static void dropRole(String role) {
+		roles.drop(p -> p.path().equals(role));
+	}
+	public static DataList<Pair<String, Movie>> getActorRole(Actor actor){
+		DataList<Link<Actor,String,Movie>> temp = roles.getSubList(p -> p.source().equals(actor));
+		@SuppressWarnings("unchecked")
+		DataList<Pair<String,Movie>> result = (DataList<Pair<String, Movie>>) temp.filter(f -> new Pair<String, Movie>(f.path(),f.dest()));
+		return result;
+	}
 }
