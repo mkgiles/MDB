@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Main">
+   <children>
+      <SplitPane dividerPositions="0.2508361204013378" prefHeight="400.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="186.0">
+               <children>
+                  <Button fx:id="editMovieGoBack" layoutX="47.0" layoutY="88.0" mnemonicParsing="false" onAction="#handle" text="Go Back" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="400.0" fitWidth="445.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+                  <TextField fx:id="movieEditDescriptionTextField" layoutX="223.0" layoutY="220.0" />
+                  <TextField fx:id="movieEditGenreTextField" layoutX="223.0" layoutY="187.0" />
+                  <TextField fx:id="movieEditDurationTextField" layoutX="223.0" layoutY="150.0" />
+                  <TextField fx:id="movieEditTitleTextField" layoutX="223.0" layoutY="84.0" />
+                  <TextField fx:id="movieEditURLTextField" layoutX="223.0" layoutY="255.0" />
+                  <Label alignment="CENTER" layoutX="177.0" layoutY="44.0" text="Edit Movie Fields" textAlignment="CENTER" />
+                  <Label layoutX="29.0" layoutY="88.0" text="Movie Title:" />
+                  <Label layoutX="29.0" layoutY="154.0" text="Running Time (In minutes):" />
+                  <Label layoutX="29.0" layoutY="191.0" text="Genre:" />
+                  <Label layoutX="29.0" layoutY="220.0" text="Description:" />
+                  <Label layoutX="29.0" layoutY="259.0" text="URL of Movie Poster:" />
+                  <TextField fx:id="movieEditDayTextField" layoutX="223.0" layoutY="117.0" prefHeight="25.0" prefWidth="35.0" />
+                  <TextField fx:id="movieEditMonthTextField" layoutX="280.0" layoutY="117.0" prefHeight="25.0" prefWidth="35.0" />
+                  <TextField fx:id="movieEditYearTextField" layoutX="337.0" layoutY="117.0" prefHeight="25.0" prefWidth="35.0" />
+                  <Label layoutX="31.0" layoutY="121.0" text="Date of Release (DD/MM/YY)" />
+                  <Button fx:id="confirmMovieEdit" layoutX="186.0" layoutY="298.0" mnemonicParsing="false" onAction="#handle" text="Confirm Edit" />
+                  <Button fx:id="getFieldsMovie" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" text="Get Fields for Movie" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</Pane>

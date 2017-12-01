@@ -32,7 +32,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="477.0">
                <children>
-                  <ListView fx:id="listviewActors" layoutX="24.0" layoutY="36.0" prefHeight="340.0" prefWidth="133.0" />
+                  <ListView fx:id="listviewActors" layoutX="24.0" layoutY="36.0" prefHeight="301.0" prefWidth="133.0" />
                   <ListView fx:id="actorSearchMovies" layoutX="173.0" layoutY="300.0" prefHeight="98.0" prefWidth="262.0" />
                   <TitledPane animated="false" layoutX="173.0" layoutY="14.0" prefHeight="109.0" prefWidth="262.0" text="Actor">
                     <content>
@@ -67,7 +67,8 @@
                   <TextField fx:id="movieYearTextField" layoutX="410.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
                   <Button fx:id="dispMovieSearch" layoutX="261.0" layoutY="257.0" mnemonicParsing="false" onAction="#handle" text="Search" />
                   <Button fx:id="showActorList" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Display Actors" />
-                  <Button fx:id="inspectActor" layoutX="25.0" layoutY="371.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Inspect Actor" />
+                  <Button fx:id="inspectActor" layoutX="25.0" layoutY="336.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Inspect Actor" />
+                  <Button fx:id="editActor" layoutX="25.0" layoutY="361.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Edit Actor" />
                </children>
             </AnchorPane>
         </items>

@@ -71,6 +71,15 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField movieAddDescriptionTextField;
 	@FXML private TextField movieAddURLTextField;
 	
+	@FXML private TextField movieEditDurationTextField;
+	@FXML private TextField movieEditGenreTextField;
+	@FXML private TextField movieEditDayTextField;
+	@FXML private TextField movieEditMonthTextField;
+	@FXML private TextField movieEditYearTextField;
+	@FXML private TextField movieEditTitleTextField;
+	@FXML private TextField movieEditDescriptionTextField;
+	@FXML private TextField movieEditURLTextField;
+	
 	@FXML private TextField actorNameTextField;
 	@FXML private TextField actorDayTextField;
 	@FXML private TextField actorMonthTextField;
@@ -84,6 +93,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField actorAddYearTextField;
 	@FXML private TextField actorAddNationalityTextField;
 	@FXML private TextField actorAddGenderTextField;
+	
+	@FXML private TextField actorEditNameTextField;
+	@FXML private TextField actorEditDayTextField;
+	@FXML private TextField actorEditMonthTextField;
+	@FXML private TextField actorEditYearTextField;
+	@FXML private TextField actorEditNationalityTextField;
+	@FXML private TextField actorEditGenderTextField;
+	
+	private static String movieToBeEdited;
+	private static String actorToBeEdited;
 	
 	@Override
 	public void start(Stage primaryStage) {		
@@ -129,6 +148,32 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}        	
             }
+            if(buttonPressed.equals("editMovieGoBack"))
+            {
+            	
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
+            	try {
+					changeScene("View Movies", "ViewMovies.fxml");
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}        	
+            }
+            if(buttonPressed.equals("editActorGoBack"))
+            {
+            	
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
+            	try {
+					changeScene("View Actors", "ViewActors.fxml");
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}        	
+            }
             if(buttonPressed.equals("viewActors"))
             {
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
@@ -140,6 +185,32 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}
             }
+            if(buttonPressed.equals("editActor") && listviewActors.getSelectionModel().getSelectedItem() != null)
+            {
+            	actorToBeEdited = (String) listviewActors.getSelectionModel().getSelectedItem();
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
+            	try {
+					changeScene("Edit Actor", "editActor.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            
+            if(buttonPressed.equals("editMovie") && listviewMovies.getSelectionModel().getSelectedItem() != null)
+            {
+            	movieToBeEdited = (String) listviewMovies.getSelectionModel().getSelectedItem(); 
+            	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+        		stage.close();
+            	try {
+					changeScene("Edit Movie", "editMovie.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+            
             if(buttonPressed.equals("addMovies"))
             {
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
@@ -156,7 +227,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
         		stage.close();
             	try {
-					changeScene("View Actors", "AddActors.fxml");
+					changeScene("Add Actors", "AddActors.fxml");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -348,6 +419,67 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	
             	
     		}
+            if(buttonPressed.equals("confirmMovieEdit"))
+            		{
+            			String movieEditTitleInput = movieEditTitleTextField.getText();
+            			String movieEditDayInput = movieEditDayTextField.getText();
+            			String movieEditMonthInput = movieEditMonthTextField.getText();
+            			String movieEditYearInput = movieEditYearTextField.getText();
+            			String movieEditDurationInput = movieEditDurationTextField.getText();
+            			String movieEditGenreInput = movieEditGenreTextField.getText();
+            			String movieEditDescriptionInput = movieEditDescriptionTextField.getText();
+            			String movieEditURLInput = movieEditURLTextField.getText();
+            			
+            			movieEditTitleTextField.setText("");
+                    	movieEditDayTextField.setText("");
+                    	movieEditMonthTextField.setText("");
+                    	movieEditYearTextField.setText("");
+                    	movieEditDurationTextField.setText("");
+                    	movieEditGenreTextField.setText("");
+                    	movieEditDescriptionTextField.setText("");
+                    	movieEditURLTextField.setText("");
+            		}
+            if(buttonPressed.equals("confirmActorEdit"))
+    		{
+            	String actorEditNameInput = actorEditNameTextField.getText();
+            	String actorEditDayInput = actorEditDayTextField.getText();
+            	String actorEditMonthInput = actorEditMonthTextField.getText();
+            	String actorEditYearInput = actorEditYearTextField.getText();
+            	String actorEditGenderInput = actorEditGenderTextField.getText();
+            	String actorEditNationalityInput = actorEditNationalityTextField.getText();
+            	
+            	actorEditNameTextField.setText("");
+            	actorEditDayTextField.setText("");
+            	actorEditMonthTextField.setText("");
+            	actorEditYearTextField.setText("");
+            	actorEditGenderTextField.setText("");
+            	actorEditNationalityTextField.setText("");
+    		}
+            
+            if(buttonPressed.equals("getFieldsActor"))
+    		{
+            	System.out.println(actorToBeEdited);
+            	actorEditNameTextField.setText(actorToBeEdited);
+            	actorEditDayTextField.setText("");
+            	actorEditMonthTextField.setText("");
+            	actorEditYearTextField.setText("");
+            	actorEditGenderTextField.setText("");
+            	actorEditNationalityTextField.setText("");
+    		}
+            
+            if(buttonPressed.equals("getFieldsMovie"))
+    		{
+            	System.out.println(movieToBeEdited);
+            	movieEditTitleTextField.setText(movieToBeEdited);
+            	movieEditDayTextField.setText("");
+            	movieEditMonthTextField.setText("");
+            	movieEditYearTextField.setText("");
+            	movieEditDurationTextField.setText("");
+            	movieEditGenreTextField.setText("");
+            	movieEditDescriptionTextField.setText("");
+            	movieEditURLTextField.setText("");
+    		}
+            
             
             }
 
