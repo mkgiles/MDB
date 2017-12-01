@@ -19,16 +19,22 @@ public class HashList<T> {
 	}
 	//Get the data at the specified key.
 	public T get(String key) {
-		return data[FNV.hash(key.getBytes())%this.data.length].data;
+		return this.data[FNV.hash(key.getBytes())%this.data.length].data;
 	}
-	public void put(T data) {
+	public void put(String key,T data) {
 		Node<T> temp = new Node<T>(tail, data);
-		this.data[Math.abs(FNV.hash(data.toString().getBytes())%this.data.length)] = temp;
+		this.data[FNV.hash(key.getBytes())%this.data.length] = temp;
 		if(this.head == null)
 			this.head = temp;
 		if(this.tail != null)
 			this.tail.next = temp;
 		this.tail = temp;
+	}
+	public void drop(String key) {
+		Node<T> temp = data[FNV.hash(key.getBytes())%data.length];
+		temp.next = null;
+		temp.prev = null;
+		temp.data = null;
 	}
 	public void sort(BiPredicate<T,T> p){
 		DataList<T> sort = list().sort(p);
@@ -52,7 +58,7 @@ public class HashList<T> {
 				hash *= prime;
 			}
 			hash = (hash>>32) ^ (hash & 0xffffffff);
-			return (int) hash;
+			return Math.abs((int) hash);
 		}
 	}
 	//Method for extracting the virtual list as a DataList object.
