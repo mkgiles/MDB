@@ -19,7 +19,8 @@ public class HashList<T> {
 	}
 	//Get the data at the specified key.
 	public T get(String key) {
-		return this.data[FNV.hash(key.getBytes())%this.data.length].data;
+		Node<T> temp = this.data[FNV.hash(key.getBytes())%this.data.length];
+		return temp==null?null:temp.data;
 	}
 	public void put(String key,T data) {
 		Node<T> temp = new Node<T>(tail, data);

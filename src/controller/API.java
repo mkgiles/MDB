@@ -65,6 +65,11 @@ public class API {
 		DataList<Pair<String,Movie>> result = (DataList<Pair<String, Movie>>) temp.filter(f -> new Pair<String, Movie>(f.path(),f.dest()));
 		return result;
 	}
+	public static DataList<Pair<Actor, String>> getMovieRole(Movie movie){
+		DataList<Link<Actor,String,Movie>> temp = roles.getSubList(p -> p.dest().equals(movie));
+		DataList<Pair<Actor,String>> result = (DataList<Pair<Actor, String>>) temp.filter(f -> new Pair<Actor, String>(f.source(),f.path()));
+		return result;
+	}
 	public static void clear() {
 		actors = null;
 		movies = null;

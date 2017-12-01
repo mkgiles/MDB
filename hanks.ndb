@@ -1,0 +1,3 @@
+type=actor name=Tom_Hanks gender=male nation=USA dob=1956-7-9
+type=movie title=Cast_Away runtime=143 genre=Drama description=A_man_is_marooned_on_an_island_after_his_plane_crashes_into_the_ocean._Far_away_from_home,_his_girlfriend,_and_any_human_contact,_he_engages_in_a_battle_of_wits_with_himself_as_he_is_tested_mentally,_physically,_and_emotionally_in_order_to_survive. poster=https://images-na.ssl-images-amazon.com/images/M/MV5BN2Y5ZTU4YjctMDRmMC00MTg4LWE1M2MtMjk4MzVmOTE4YjkzXkEyXkFqcGdeQXVyNTc1NTQxODI@._V1_.jpg release=2000-12-22
+type=role actor=Tom_Hanks movie=Cast_Away role=Chuck_Noland

@@ -67,7 +67,7 @@ public class Ndb {
 		if(!(extract(object,"type").equals("actor")))
 			throw (new Exception("Non-Actor object was parsed by Actor method."));
 		name = extract(object,"name").replace("_", " ");
-		gender = extract(object,"gender")=="female"?true:false;
+		gender = extract(object,"gender").equals("female")?true:false;
 		nation = extract(object,"nation");
 		String[] dob =extract(object,"dob").split("-");
 		year = Integer.parseInt(dob[0]);
