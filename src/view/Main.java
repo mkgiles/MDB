@@ -23,12 +23,12 @@ import javafx.scene.layout.Pane;
 
 public class Main extends Application implements EventHandler<ActionEvent> {
 	
+	
+	
 	Stage window;
-	Scene scene1, scene2, scene3, scene4, scene5;
-	Boolean closeNS = false;
-	Stage previousStage;
 	FXMLLoader loader;
-	Scene currentScene;
+	
+	//Initialization of FXID's.
 	
 	@FXML private ListView listviewMovies;
 	@FXML private ListView listviewActors;
@@ -104,6 +104,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	private static String movieToBeEdited;
 	private static String actorToBeEdited;
 	
+	//Initialization of primary scene as well as stage.
+	
 	@Override
 	public void start(Stage primaryStage) {		
 		try {
@@ -111,16 +113,15 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 			loader = new FXMLLoader(getClass().getResource("MDB.fxml"));
 			
 			Pane root =  (Pane)loader.load();
-			scene1 =new Scene(root,600,400);	
+			Scene scene =new Scene(root,600,400);	
 			
 			window.setMinWidth(610);
 			window.setMinHeight(440);
 			window.setMaxWidth(610);
 			window.setMaxHeight(440);
-			window.setScene(scene1);
+			window.setScene(scene);
 			window.setTitle("MDB (Written by Conor Giles and Andrew Bates)");
 			window.show();
-			setPreviousStage(window);
 			
 			}
 		catch(IOException e){}
@@ -130,6 +131,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 		launch(args);
 	}
 	
+	
+	//Action event handler, reads the FXID's of each action source and uses them to determine what buttons they belong to
+	//as well as what actions should be taken based on those buttons.
 	
 	@Override
 	public void handle(ActionEvent event) {
@@ -148,6 +152,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}        	
             }
+            //Returns to viewMovies from editing
             if(buttonPressed.equals("editMovieGoBack"))
             {
             	
@@ -161,6 +166,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}        	
             }
+            //Returns to viewActors from editing.
             if(buttonPressed.equals("editActorGoBack"))
             {
             	
@@ -174,6 +180,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}        	
             }
+            //Changes scene to viewActors
             if(buttonPressed.equals("viewActors"))
             {
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
@@ -185,6 +192,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}
             }
+            //Changes scene to editActor only if there is an actor selected in the listview to edit.
             if(buttonPressed.equals("editActor") && listviewActors.getSelectionModel().getSelectedItem() != null)
             {
             	actorToBeEdited = (String) listviewActors.getSelectionModel().getSelectedItem();
@@ -198,6 +206,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				}
             }
             
+            //Changes scene to editMovie only if there is a movie selected in the listview to edit.
             if(buttonPressed.equals("editMovie") && listviewMovies.getSelectionModel().getSelectedItem() != null)
             {
             	movieToBeEdited = (String) listviewMovies.getSelectionModel().getSelectedItem(); 
@@ -211,6 +220,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				}
             }
             
+            //Changes scene to AddMovies
             if(buttonPressed.equals("addMovies"))
             {
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
@@ -222,6 +232,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				};
             }
+            
+            //Changes scene to AddActors
             if(buttonPressed.equals("addActors"))
             {
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
@@ -234,6 +246,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				}
             }
             
+            //Returns back to first scene (MDB)
             if(buttonPressed.equals("closeScene"))
             {
             		Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
@@ -246,6 +259,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     					e.printStackTrace();
     				};
             }
+            
+            //Used to determine whether an argument is greater than or less than in regards to a date.
             
             if(buttonPressed.equals("GTLT")) 
 			{
@@ -260,16 +275,19 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					btn.setText("<");
 				}
 			}
+            
+            //Shows movie list, populated with all movies.
             if(buttonPressed.equals("showMovieList")) 
 			{	
             	listviewMovies.getItems().addAll("List Object");
 			}
-            
+            //Shows actor list, populated with all actors.
             if(buttonPressed.equals("showActorList")) 
 			{	
             	listviewActors.getItems().addAll("List Object");
 			}
             
+            //Shows results of search. Each bool determines whether search criteria is used or not.
             if(buttonPressed.equals("dispActorSearch")) 
 			{  
             	Boolean actorNameBool = actorNameCB.isSelected();
@@ -302,6 +320,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	movieSearchActors.getItems().addAll("List Object");
 			}
             
+            //Shows results of search. Each bool determines whether search criteria is used or not.
+            //Need to add roles here, too.
             if(buttonPressed.equals("dispMovieSearch")) 
 			{  
             	
@@ -340,6 +360,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorSearchMovies.getItems().setAll();
             	actorSearchMovies.getItems().addAll("List Object");
 			}
+            
+            //Used to pass information from movie clicked on in listView to window on the right.
             if(buttonPressed.equals("inspectMovie"))
             		{
             	String currentSelection = (String) listviewMovies.getSelectionModel().getSelectedItem();
@@ -352,6 +374,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	movieGenre.setText(currentSelection);
             	movieDescription.setText(currentSelection);
             		}
+            
+          //Used to pass information from Actor clicked on in listView to window on the right.
             if(buttonPressed.equals("inspectActor"))
     		{
             	String currentSelection = (String) listviewActors.getSelectionModel().getSelectedItem();
@@ -364,9 +388,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorNationality.setText(currentSelection);
     		}
             
+            //Used to add actors to system, based on what is read from the TextFields.
             if(buttonPressed.equals("addActorToSystem"))
     		{
-            	//USED TO ADD ACTORS TO THE SYSTEM. REPLACE PRINTLN'S WITH METHOD TO ADD ACTOR.
             	
             	String actorAddNameInput = actorAddNameTextField.getText();
             	String actorAddDayInput = actorAddDayTextField.getText();
@@ -388,9 +412,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorAddNationalityTextField.setText("");
     		}
             
+            
+          //Used to add Movies to system, based on what is read from the TextFields.
             if(buttonPressed.equals("addMovieToSystem"))
     		{
-            	//USED TO ADD MOVIES TO THE SYSTEM. REPLACE PRINTLN'S WITH METHOD TO ADD MOVIE.
             	
             	String movieAddTitleInput = movieAddTitleTextField.getText();
             	String movieAddDayInput = movieAddDayTextField.getText();
@@ -419,6 +444,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	
             	
     		}
+            
+            //Used to confirm the changing of information about a movie, using input from the textfields.
             if(buttonPressed.equals("confirmMovieEdit"))
             		{
             			String movieEditTitleInput = movieEditTitleTextField.getText();
@@ -439,6 +466,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                     	movieEditDescriptionTextField.setText("");
                     	movieEditURLTextField.setText("");
             		}
+          //Used to confirm the changing of information about an actor, using input from the textfields.
             if(buttonPressed.equals("confirmActorEdit"))
     		{
             	String actorEditNameInput = actorEditNameTextField.getText();
@@ -455,7 +483,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorEditGenderTextField.setText("");
             	actorEditNationalityTextField.setText("");
     		}
-            
+            //Gets information already existing on an actor and puts it into the textfields for editing.
             if(buttonPressed.equals("getFieldsActor"))
     		{
             	System.out.println(actorToBeEdited);
@@ -466,7 +494,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorEditGenderTextField.setText("");
             	actorEditNationalityTextField.setText("");
     		}
-            
+          //Gets information already existing on a movie and puts it into the textfields for editing.
             if(buttonPressed.equals("getFieldsMovie"))
     		{
             	System.out.println(movieToBeEdited);
@@ -484,11 +512,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             }
 
 	
-	public void setPreviousStage(Stage stage) 
-	{
-		
-		previousStage = stage;
-	}
+	//Changes scene, based on the FXML name that is fed into method. The Title is just used for presentation purposes.
 	
 	public void changeScene(String title, String fxml) throws IOException
 	{
