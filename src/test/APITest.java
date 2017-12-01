@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.AfterEach;
