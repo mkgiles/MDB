@@ -1,20 +1,20 @@
 package view;
 
-import java.awt.Checkbox;
+
 import java.io.IOException;
 
 import controller.API;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import model.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -46,14 +46,27 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private Label movieGenre;
 	@FXML private Label movieDescription;
 	
-	@FXML private Checkbox actorNameCB;
-	@FXML private Checkbox actorDobCB;
-	@FXML private Checkbox actorNationalityCB;
+	@FXML private CheckBox actorNameCB;
+	@FXML private CheckBox actorDobCB;
+	@FXML private CheckBox actorNationalityCB;
 	
-	@FXML private Checkbox movieTitleCB;
-	@FXML private Checkbox movieDurationCB;
-	@FXML private Checkbox movieGenreCB;
-	@FXML private Checkbox movieDorCB;
+	@FXML private CheckBox movieTitleCB;
+	@FXML private CheckBox movieDurationCB;
+	@FXML private CheckBox movieGenreCB;
+	@FXML private CheckBox movieDorCB;
+	
+	@FXML private TextField movieDurationTextField;
+	@FXML private TextField movieGenreTextField;
+	@FXML private TextField movieDayTextField;
+	@FXML private TextField movieMonthTextField;
+	@FXML private TextField movieYearTextField;
+	@FXML private TextField movieTitleTextField;
+	
+	@FXML private TextField actorNameTextField;
+	@FXML private TextField actorDayTextField;
+	@FXML private TextField actorMonthTextField;
+	@FXML private TextField actorYearTextField;
+	@FXML private TextField actorNationalityTextField;
 	
 	@Override
 	public void start(Stage primaryStage) {		
@@ -168,17 +181,76 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 			{	
             	listviewActors.getItems().addAll("List Object");
 			}
-            if(buttonPressed.equals("dispMovieSearch")) 
-			{	
-            	actorSearchMovies.getItems().addAll("List Object");
-			}
+            
             if(buttonPressed.equals("dispActorSearch")) 
-			{	           	
-            	//actorNameCB
-            	//actorDobCB;
-            	//actorNationalityCB;
+			{  
+            	Boolean actorNameBool = actorNameCB.isSelected();
+            	Boolean actorDobBool = actorDobCB.isSelected();
+            	Boolean actorNationalityBool = actorNationalityCB.isSelected();
             	
+            	String actorNameInput = actorNameTextField.getText();
+        	 	String actorDayInput = actorDayTextField.getText();
+        	 	String actorMonthInput = actorMonthTextField.getText();
+        	 	String actorYearInput = actorYearTextField.getText();
+        	 	String actorNationalityInput = actorNationalityTextField.getText();
+        	 	
+        	 	
+            	if(actorNameBool == true)
+            	{
+            		System.out.println("Name Checkbox selected.");
+            		System.out.println(actorNameInput);
+            	}
+            	if(actorDobBool == true)
+            	{
+            		System.out.println("Date of Birth Checkbox selected.");
+            		System.out.println(actorDayInput + "/" + actorMonthInput + "/" + actorYearInput);
+            	}
+            	if(actorNationalityBool == true)
+            	{
+            		System.out.println("Nationality Checkbox selected.");
+            		System.out.println(actorNationalityInput);
+            	}
+            	movieSearchActors.getItems().setAll();
             	movieSearchActors.getItems().addAll("List Object");
+			}
+            
+            if(buttonPressed.equals("dispMovieSearch")) 
+			{  
+            	
+            	 	Boolean movieTitleBool = movieTitleCB.isSelected();
+            	 	Boolean movieDurationBool = movieDurationCB.isSelected();
+            	 	Boolean movieGenreBool = movieGenreCB.isSelected();
+            	 	Boolean movieDorBool = movieDorCB.isSelected();
+            	 	
+            	 	String movieTitleInput = movieTitleTextField.getText();
+            	 	String movieDayInput = movieDayTextField.getText();
+            	 	String movieMonthInput = movieMonthTextField.getText();
+            	 	String movieYearInput = movieYearTextField.getText();
+            	 	String movieGenreInput = movieGenreTextField.getText();
+            	 	String movieDurationInput = movieDurationTextField.getText();
+            	 	
+            	if(movieTitleBool == true)
+            	{
+            		System.out.println("Title Checkbox selected.");
+            		System.out.println(movieTitleInput);
+            	}
+            	if(movieDorBool == true)
+            	{
+            		System.out.println("Date of Release Checkbox selected.");
+            		System.out.println(movieDayInput + "/" + movieMonthInput + "/" + movieYearInput);
+            	}
+            	if(movieGenreBool == true)
+            	{
+            		System.out.println("Genre Checkbox selected.");
+            		System.out.println(movieGenreInput);
+            	}
+            	if(movieDurationBool == true)
+            	{
+            		System.out.println("Duration Checkbox selected.");
+            		System.out.println(movieDurationInput);
+            	}
+            	actorSearchMovies.getItems().setAll();
+            	actorSearchMovies.getItems().addAll("List Object");
 			}
             if(buttonPressed.equals("inspectMovie"))
             		{
@@ -202,10 +274,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorGender.setText(currentSelection);
             	actorDob.setText(currentSelection);
             	actorNationality.setText(currentSelection);
-    		}
-            
-            
+    		} 
             }
+
 	
 	public void setPreviousStage(Stage stage) 
 	{

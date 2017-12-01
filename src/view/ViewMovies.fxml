@@ -33,7 +33,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="477.0">
                <children>
                   <ListView fx:id="listviewMovies" layoutX="24.0" layoutY="36.0" prefHeight="340.0" prefWidth="133.0" />
-                  <ListView fx:id="movieSearchActors" layoutX="173.0" layoutY="305.0" prefHeight="119.0" prefWidth="262.0" />
+                  <ListView fx:id="movieSearchActors" layoutX="173.0" layoutY="305.0" prefHeight="91.0" prefWidth="262.0" />
                   <TitledPane animated="false" layoutX="173.0" layoutY="2.0" prefHeight="176.0" prefWidth="262.0" text="Movie">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="260.0">
@@ -52,17 +52,17 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <CheckBox layoutX="175.0" layoutY="195.0" mnemonicParsing="false" text="Search By" />
-                  <CheckBox layoutX="175.0" layoutY="232.0" mnemonicParsing="false" text="Search By" />
-                  <TextField layoutX="264.0" layoutY="191.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
-                  <CheckBox layoutX="175.0" layoutY="253.0" mnemonicParsing="false" text="Search By" />
+                  <CheckBox fx:id="actorNameCB" layoutX="175.0" layoutY="195.0" mnemonicParsing="false" text="Search By" />
+                  <CheckBox fx:id="actorDobCB" layoutX="175.0" layoutY="232.0" mnemonicParsing="false" text="Search By" />
+                  <TextField fx:id="actorNameTextField" layoutX="264.0" layoutY="191.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
+                  <CheckBox fx:id="actorNationalityCB" layoutX="175.0" layoutY="253.0" mnemonicParsing="false" text="Search By" />
                   <Button fx:id="GTLT" layoutX="315.0" layoutY="220.0" mnemonicParsing="false" onAction="#handle" text="&lt;" />
-                  <TextField layoutX="360.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
+                  <TextField fx:id="actorDayTextField" layoutX="360.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
                   <Label layoutX="263.0" layoutY="224.0" prefHeight="17.0" prefWidth="52.0" text="Birthday" />
-                  <TextField layoutX="264.0" layoutY="249.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />
+                  <TextField fx:id="actorNationalityTextField" layoutX="264.0" layoutY="249.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />
                   <Label layoutX="173.0" layoutY="288.0" text="Results:" />
-                  <TextField layoutX="385.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
-                  <TextField layoutX="412.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
+                  <TextField fx:id="actorMonthTextField" layoutX="385.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
+                  <TextField fx:id="actorYearTextField" layoutX="412.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
                   <Button fx:id="dispActorSearch" layoutX="263.0" layoutY="277.0" mnemonicParsing="false" onAction="#handle" text="Search" />
                   <Button fx:id="showMovieList" layoutX="24.0" layoutY="11.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Display Movies" />
                   <Button fx:id="inspectMovie" layoutX="24.0" layoutY="372.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Inspect Movie" />
