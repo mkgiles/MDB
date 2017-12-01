@@ -62,11 +62,28 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField movieYearTextField;
 	@FXML private TextField movieTitleTextField;
 	
+	@FXML private TextField movieAddDurationTextField;
+	@FXML private TextField movieAddGenreTextField;
+	@FXML private TextField movieAddDayTextField;
+	@FXML private TextField movieAddMonthTextField;
+	@FXML private TextField movieAddYearTextField;
+	@FXML private TextField movieAddTitleTextField;
+	@FXML private TextField movieAddDescriptionTextField;
+	@FXML private TextField movieAddURLTextField;
+	
 	@FXML private TextField actorNameTextField;
 	@FXML private TextField actorDayTextField;
 	@FXML private TextField actorMonthTextField;
 	@FXML private TextField actorYearTextField;
 	@FXML private TextField actorNationalityTextField;
+	@FXML private TextField actorGenderTextField;
+	
+	@FXML private TextField actorAddNameTextField;
+	@FXML private TextField actorAddDayTextField;
+	@FXML private TextField actorAddMonthTextField;
+	@FXML private TextField actorAddYearTextField;
+	@FXML private TextField actorAddNationalityTextField;
+	@FXML private TextField actorAddGenderTextField;
 	
 	@Override
 	public void start(Stage primaryStage) {		
@@ -274,7 +291,64 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorGender.setText(currentSelection);
             	actorDob.setText(currentSelection);
             	actorNationality.setText(currentSelection);
-    		} 
+    		}
+            
+            if(buttonPressed.equals("addActorToSystem"))
+    		{
+            	//USED TO ADD ACTORS TO THE SYSTEM. REPLACE PRINTLN'S WITH METHOD TO ADD ACTOR.
+            	
+            	String actorAddNameInput = actorAddNameTextField.getText();
+            	String actorAddDayInput = actorAddDayTextField.getText();
+            	String actorAddMonthInput = actorAddMonthTextField.getText();
+            	String actorAddYearInput = actorAddYearTextField.getText();
+            	String actorAddGenderInput = actorAddGenderTextField.getText();
+            	String actorAddNationalityInput = actorAddNationalityTextField.getText();
+            	
+            	System.out.println(actorAddNameInput);
+            	System.out.println(actorAddDayInput + "/" + actorAddMonthInput + "/" + actorAddYearInput);
+            	System.out.println(actorAddGenderInput);
+            	System.out.println(actorAddNationalityInput);
+            	
+            	actorAddNameTextField.setText("");
+            	actorAddDayTextField.setText("");
+            	actorAddMonthTextField.setText("");
+            	actorAddYearTextField.setText("");
+            	actorAddGenderTextField.setText("");
+            	actorAddNationalityTextField.setText("");
+    		}
+            
+            if(buttonPressed.equals("addMovieToSystem"))
+    		{
+            	//USED TO ADD MOVIES TO THE SYSTEM. REPLACE PRINTLN'S WITH METHOD TO ADD MOVIE.
+            	
+            	String movieAddTitleInput = movieAddTitleTextField.getText();
+            	String movieAddDayInput = movieAddDayTextField.getText();
+            	String movieAddMonthInput = movieAddMonthTextField.getText();
+            	String movieAddYearInput = movieAddYearTextField.getText();
+            	String movieAddDurationInput = movieAddDurationTextField.getText();
+            	String movieAddGenreInput = movieAddGenreTextField.getText();
+            	String movieAddDescriptionInput = movieAddDescriptionTextField.getText();
+            	String movieAddURLInput = movieAddURLTextField.getText();
+            	
+            	System.out.println(movieAddTitleInput);
+            	System.out.println(movieAddDayInput + "/" + movieAddMonthInput + "/" + movieAddYearInput);
+            	System.out.println(movieAddDurationInput);
+            	System.out.println(movieAddGenreInput);
+            	System.out.println(movieAddDescriptionInput);
+            	System.out.println(movieAddURLInput);
+            	
+            	movieAddTitleTextField.setText("");
+            	movieAddDayTextField.setText("");
+            	movieAddMonthTextField.setText("");
+            	movieAddYearTextField.setText("");
+            	movieAddDurationTextField.setText("");
+            	movieAddGenreTextField.setText("");
+            	movieAddDescriptionTextField.setText("");
+            	movieAddURLTextField.setText("");
+            	
+            	
+    		}
+            
             }
 
 	

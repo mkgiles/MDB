@@ -24,17 +24,23 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="400.0" fitWidth="445.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
-                  <TextField layoutX="223.0" layoutY="188.0" />
-                  <TextField layoutX="223.0" layoutY="155.0" />
-                  <TextField layoutX="223.0" layoutY="119.0" />
-                  <TextField layoutX="223.0" layoutY="84.0" />
-                  <TextField layoutX="223.0" layoutY="225.0" />
+                  <TextField fx:id="movieAddDescriptionTextField" layoutX="223.0" layoutY="220.0" />
+                  <TextField fx:id="movieAddGenreTextField" layoutX="223.0" layoutY="187.0" />
+                  <TextField fx:id="movieAddDurationTextField" layoutX="223.0" layoutY="150.0" />
+                  <TextField fx:id="movieAddTitleTextField" layoutX="223.0" layoutY="84.0" />
+                  <TextField fx:id="movieAddURLTextField" layoutX="223.0" layoutY="255.0" />
                   <Label alignment="CENTER" layoutX="177.0" layoutY="44.0" text="Add Movie Fields" textAlignment="CENTER" />
                   <Label layoutX="29.0" layoutY="88.0" text="Movie Title:" />
-                  <Label layoutX="29.0" layoutY="122.0" text="Running Time (In minutes):" />
-                  <Label layoutX="29.0" layoutY="159.0" text="Genre:" />
-                  <Label layoutX="29.0" layoutY="190.0" text="Description:" />
-                  <Label layoutX="29.0" layoutY="229.0" text="URL of Movie Poster:" />
+                  <Label layoutX="29.0" layoutY="154.0" text="Running Time (In minutes):" />
+                  <Label layoutX="29.0" layoutY="191.0" text="Genre:" />
+                  <Label layoutX="29.0" layoutY="220.0" text="Description:" />
+                  <Label layoutX="29.0" layoutY="259.0" text="URL of Movie Poster:" />
+                  <TextField fx:id="movieAddDayTextField" layoutX="223.0" layoutY="117.0" prefHeight="25.0" prefWidth="35.0" />
+                  <TextField fx:id="movieAddMonthTextField" layoutX="280.0" layoutY="117.0" prefHeight="25.0" prefWidth="35.0" />
+                  <TextField fx:id="movieAddYearTextField" layoutX="337.0" layoutY="117.0" prefHeight="25.0" prefWidth="35.0" />
+                  <Label layoutX="31.0" layoutY="121.0" text="Date of Release (DD/MM/YY)" />
+                  <Button fx:id="addMovieFromNDB" layoutX="337.0" layoutY="359.0" mnemonicParsing="false" text="Add from NDB" />
+                  <Button fx:id="addMovieToSystem" layoutX="186.0" layoutY="298.0" mnemonicParsing="false" onAction="#handle" text="Add Movie" />
                </children>
             </AnchorPane>
         </items>
