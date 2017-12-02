@@ -22,6 +22,8 @@
                   <Button fx:id="addActors" layoutX="50.0" layoutY="163.0" mnemonicParsing="false" onAction="#handle" text="Add Actors" />
                   <Button fx:id="removeActors" layoutX="40.0" layoutY="187.0" mnemonicParsing="false" onAction="#handle" text="Remove Actors" />
                   <Button fx:id="removeMovies" layoutX="38.0" layoutY="212.0" mnemonicParsing="false" onAction="#handle" text="Remove Movies" />
+                  <Button fx:id="removeRoles" layoutX="40.0" layoutY="262.0" mnemonicParsing="false" onAction="#handle" text="Remove Roles" />
+                  <Button fx:id="addRoles" layoutX="53.0" layoutY="237.0" mnemonicParsing="false" onAction="#handle" text="Add Roles" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

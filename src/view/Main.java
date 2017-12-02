@@ -106,7 +106,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField loadNDBTextField;
 	@FXML private TextField saveNDBTextField;
 	
-
+	@FXML private TextField actorAddRoleNameTextField;
+	@FXML private TextField movieAddRoleTitleTextField;
+	@FXML private TextField actorAddRoleCharacterTextField;
+	
+	@FXML private TextField actorRemoveRoleNameTextField;
+	@FXML private TextField movieRemoveRoleTitleTextField;
+	@FXML private TextField actorRemoveRoleCharacterTextField;
+	
 	private static Movie movieToBeEdited;
 	private static Actor actorToBeEdited;
 
@@ -294,6 +301,35 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     					e.printStackTrace();
     				};
             }
+            
+          //Changes scene to addRoles
+            if(buttonPressed.equals("addRoles"))
+            {
+            		Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+            		stage.close();
+            		
+            		try {
+    					changeScene("Add Roles", "addRole.fxml");
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				};
+            }
+            
+          //Changes scene to removeRoles
+            if(buttonPressed.equals("removeRoles"))
+            {
+            		Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+            		stage.close();
+            		
+            		try {
+    					changeScene("Remove Roles", "removeRole.fxml");
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				};
+            }
+            
             
             //Used to determine whether an argument is greater than or less than in regards to a date.
             
@@ -660,6 +696,22 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				{
 				btn.setText("Title (Ascending)");
 				}
+    		}
+            
+            if(buttonPressed.equals("confirmRoleAdd") && !actorAddRoleNameTextField.getText().equals("")
+            		&& !movieAddRoleTitleTextField.getText().equals("") && !actorAddRoleCharacterTextField.getText().equals(""))
+    		{
+            	actorAddRoleNameTextField.setText("");
+            	actorAddRoleCharacterTextField.setText("");
+            	movieAddRoleTitleTextField.setText("");
+    		}
+            
+            if(buttonPressed.equals("confirmRoleRemove") && !actorRemoveRoleNameTextField.getText().equals("")
+            		&& !movieRemoveRoleTitleTextField.getText().equals("") && !actorRemoveRoleCharacterTextField.getText().equals(""))
+    		{
+            	actorRemoveRoleNameTextField.setText("");
+            	actorRemoveRoleCharacterTextField.setText("");
+            	movieRemoveRoleTitleTextField.setText("");
     		}
             
             
