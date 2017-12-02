@@ -31,10 +31,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	
 	//Initialization of FXID's.
 	
-	@FXML private ListView listviewMovies;
-	@FXML private ListView listviewActors;
-	@FXML private ListView actorSearchMovies;
-	@FXML private ListView movieSearchActors;
+	@FXML private ListView<Movie> listviewMovies;
+	@FXML private ListView<Actor> listviewActors;
+	@FXML private ListView<Actor> actorSearchMovies;
+	@FXML private ListView<Movie> movieSearchActors;
 	
 	@FXML private Label actorName;
 	@FXML private Label actorDob;
@@ -199,7 +199,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //Changes scene to editActor only if there is an actor selected in the listview to edit.
             if(buttonPressed.equals("editActor") && listviewActors.getSelectionModel().getSelectedItem() != null)
             {
-            	actorToBeEdited = (String) listviewActors.getSelectionModel().getSelectedItem();
+            	actorToBeEdited = listviewActors.getSelectionModel().getSelectedItem().getName();
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
         		stage.close();
             	try {
@@ -213,7 +213,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //Changes scene to editMovie only if there is a movie selected in the listview to edit.
             if(buttonPressed.equals("editMovie") && listviewMovies.getSelectionModel().getSelectedItem() != null)
             {
-            	movieToBeEdited = (String) listviewMovies.getSelectionModel().getSelectedItem(); 
+            	movieToBeEdited = listviewMovies.getSelectionModel().getSelectedItem().getTitle(); 
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
         		stage.close();
             	try {
@@ -283,14 +283,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //Shows movie list, populated with all movies.
             if(buttonPressed.equals("showMovieList")) 
 			{	
-            	listviewMovies.getItems().addAll("List Object");
+            	listviewMovies.getItems().clear();
+            	for(int i = 0; i<API.listMovies().length();i++)
+            		listviewMovies.getItems().add(API.listMovies().get(i));
 			}
             //Shows actor list, populated with all actors.
             if(buttonPressed.equals("showActorList")) 
 			{	
-            	listviewActors.getItems().addAll("List Object");
+            	for(int i = 0; i<API.listActors().length();i++)
+            		listviewActors.getItems().add(API.listActors().get(i));
 			}
-            
             //Shows results of search. Each bool determines whether search criteria is used or not.
             if(buttonPressed.equals("dispActorSearch")) 
 			{  
@@ -321,7 +323,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             		System.out.println(actorNationalityInput);
             	}
             	movieSearchActors.getItems().setAll();
-            	movieSearchActors.getItems().addAll("List Object");
+//            	movieSearchActors.getItems().addAll("List Object");
 			}
             
             //Shows results of search. Each bool determines whether search criteria is used or not.
@@ -362,34 +364,34 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             		System.out.println(movieDurationInput);
             	}
             	actorSearchMovies.getItems().setAll();
-            	actorSearchMovies.getItems().addAll("List Object");
+//            	actorSearchMovies.getItems().addAll("List Object");
 			}
             
             //Used to pass information from movie clicked on in listView to window on the right.
             if(buttonPressed.equals("inspectMovie"))
             		{
-            	String currentSelection = (String) listviewMovies.getSelectionModel().getSelectedItem();
+            	Movie currentSelection = listviewMovies.getSelectionModel().getSelectedItem();
             	System.out.println(currentSelection);
             	//Put function here to match title in selection with title of movie.
             	//Fill other fields with other criteria (Title, Running Time, Genre.)
-            	movieTitle.setText(currentSelection);
-            	movieDor.setText(currentSelection);
-            	movieRunningTime.setText(currentSelection);
-            	movieGenre.setText(currentSelection);
-            	movieDescription.setText(currentSelection);
+            	movieTitle.setText(currentSelection.getTitle());
+            	movieDor.setText(currentSelection.getDor().toString());
+            	movieRunningTime.setText("" + currentSelection.getRunningTime());
+            	movieGenre.setText(currentSelection.getGenre());
+            	movieDescription.setText(currentSelection.getDescription());
             		}
             
           //Used to pass information from Actor clicked on in listView to window on the right.
             if(buttonPressed.equals("inspectActor"))
     		{
-            	String currentSelection = (String) listviewActors.getSelectionModel().getSelectedItem();
+            	Actor currentSelection = listviewActors.getSelectionModel().getSelectedItem();
             	//Put function here to match name in selection with name of actor.
             	//Fill other fields with other criteria (Name, Gender, DoB, etc.)
             	System.out.println(currentSelection);
-            	actorName.setText(currentSelection);
-            	actorGender.setText(currentSelection);
-            	actorDob.setText(currentSelection);
-            	actorNationality.setText(currentSelection);
+            	actorName.setText(currentSelection.getName());
+            	actorGender.setText(currentSelection.getGender()?"female":"male");
+            	actorDob.setText(currentSelection.getDob().toString());
+            	actorNationality.setText(currentSelection.getNationality());
     		}
             
             //Used to add actors to system, based on what is read from the TextFields.
