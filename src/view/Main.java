@@ -2,6 +2,8 @@ package view;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.function.BiPredicate;
 
 import controller.API;
 import controller.Ndb;
@@ -10,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import model.*;
+import structures.DataList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -33,8 +36,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	
 	@FXML private ListView<Movie> listviewMovies;
 	@FXML private ListView<Actor> listviewActors;
-	@FXML private ListView<Actor> actorSearchMovies;
-	@FXML private ListView<Movie> movieSearchActors;
+	@FXML private ListView<Movie> actorSearchMovies;
+	@FXML private ListView<Actor> movieSearchActors;
 	
 	@FXML private Label actorName;
 	@FXML private Label actorDob;
@@ -105,6 +108,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	
 	@FXML private TextField loadNDBTextField;
 	@FXML private TextField saveNDBTextField;
+	private BiPredicate<Actor, Actor> movieSearchPredicate = (a,b) -> a.getName().compareTo(b.getName())<=0;
 	
 
 	private static Movie movieToBeEdited;
@@ -338,24 +342,32 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         	 	String actorYearInput = actorYearTextField.getText();
         	 	String actorNationalityInput = actorNationalityTextField.getText();
         	 	
+        	 	DataList<Actor> list = API.listActors();
+        	 	
         	 	
             	if(actorNameBool == true)
             	{
             		System.out.println("Name Checkbox selected.");
             		System.out.println(actorNameInput);
+            		list = list.getSubList(p -> p.getName().equals(actorNameInput));
             	}
             	if(actorDobBool == true)
             	{
             		System.out.println("Date of Birth Checkbox selected.");
             		System.out.println(actorDayInput + "/" + actorMonthInput + "/" + actorYearInput);
+            		list = list.getSubList(p -> p.getDob().equals(LocalDate.of(Integer.parseInt(actorYearInput), Integer.parseInt(actorMonthInput), Integer.parseInt(actorDayInput))));
             	}
             	if(actorNationalityBool == true)
             	{
             		System.out.println("Nationality Checkbox selected.");
             		System.out.println(actorNationalityInput);
+            		list = list.getSubList(p -> p.getNationality().equals(actorNationalityInput));
             	}
-            	movieSearchActors.getItems().setAll();
-//            	movieSearchActors.getItems().addAll("List Object");
+            	list = list.sort(movieSearchPredicate);
+            	movieSearchActors.getItems().clear();
+            	for(int i=0; i<list.length();i++) {
+            		movieSearchActors.getItems().add(list.get(i));
+            	}
 			}
             
             //Shows results of search. Each bool determines whether search criteria is used or not.
@@ -602,26 +614,32 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				if(buttonText.equals("Name (Ascending)")) 
 				{
 				btn.setText("Name (Descending)");
+				movieSearchPredicate = (a,b) -> a.getName().compareTo(b.getName())>=0;
 				}
 				if(buttonText.equals("Name (Descending)")) 
 				{
 				btn.setText("DOB (Ascending)");
+				movieSearchPredicate = (a,b) -> a.getDob().compareTo(b.getDob())<=0;
 				}
-				if(buttonText.equals("DOB (Ascending)")) 
+				if(buttonText.equals("DOB (Ascending)"))
 				{
 				btn.setText("DOB (Descending)");
+				movieSearchPredicate = (a,b) -> a.getDob().compareTo(b.getDob())>=0;
 				}
 				if(buttonText.equals("DOB (Descending)")) 
 				{
 				btn.setText("Nationality (Ascending)");
+				movieSearchPredicate = (a,b) -> a.getNationality().compareTo(b.getNationality())<=0;
 				}
 				if(buttonText.equals("Nationality (Ascending)")) 
 				{
 				btn.setText("Nationality (Descending)");
+				movieSearchPredicate = (a,b) -> a.getNationality().compareTo(b.getNationality())>=0;
 				}
 				if(buttonText.equals("Nationality (Descending)")) 
 				{
 				btn.setText("Name (Ascending)");
+				movieSearchPredicate = (a,b) -> a.getName().compareTo(b.getName())<=0;
 				}
     		}
             if(buttonPressed.equals("actorMovieSort"))

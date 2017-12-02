@@ -171,8 +171,14 @@ public class DataList<T> {
 		DataList<T> temp = copy(this);
 		for(Node<T> node = temp.head; node != null; node = node.next) {
 			if(!p.test(node.data)) {
-				node.next.prev = node.prev;
-				node.prev.next = node.next;
+				if(node.next !=null)
+					node.next.prev = node.prev;
+				else
+					temp.tail = node.prev;
+				if(node.prev != null)
+					node.prev.next = node.next;
+				else
+					temp.head = node.next;
 			}
 		}
 		return temp;
