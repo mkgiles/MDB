@@ -77,7 +77,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField movieEditDayTextField;
 	@FXML private TextField movieEditMonthTextField;
 	@FXML private TextField movieEditYearTextField;
-	@FXML private TextField movieEditTitleTextField;
 	@FXML private TextField movieEditDescriptionTextField;
 	@FXML private TextField movieEditURLTextField;
 	
@@ -95,7 +94,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField actorAddNationalityTextField;
 	@FXML private TextField actorAddGenderTextField;
 	
-	@FXML private TextField actorEditNameTextField;
 	@FXML private TextField actorEditDayTextField;
 	@FXML private TextField actorEditMonthTextField;
 	@FXML private TextField actorEditYearTextField;
@@ -108,8 +106,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField loadNDBTextField;
 	@FXML private TextField saveNDBTextField;
 	
+
 	private static Movie movieToBeEdited;
 	private static Actor actorToBeEdited;
+
 	
 	//Initialization of primary scene as well as stage.
 	
@@ -496,19 +496,20 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     		}
             
             //Used to confirm the changing of information about a movie, using input from the textfields.
-            if(buttonPressed.equals("confirmMovieEdit") && !movieEditTitleTextField.getText().equals("")
+            if(buttonPressed.equals("confirmMovieEdit")
             		&& !movieEditDayTextField.getText().equals("")&& !movieEditMonthTextField.getText().equals("")
             		&& !movieEditYearTextField.getText().equals("")&& !movieEditDurationTextField.getText().equals("")
             		&& !movieEditGenreTextField.getText().equals("")&& !movieEditDescriptionTextField.getText().equals("")
             		&& !movieEditURLTextField.getText().equals(""))
             		{
+
             			API.getMovie(movieToBeEdited.getTitle()).setDor(Integer.parseInt(movieEditYearTextField.getText()),Integer.parseInt(movieEditMonthTextField.getText()),Integer.parseInt(movieEditDayTextField.getText()));
             			API.getMovie(movieToBeEdited.getTitle()).setRunningTime(Integer.parseInt(movieEditDurationTextField.getText()));
             			API.getMovie(movieToBeEdited.getTitle()).setGenre(movieEditGenreTextField.getText());
             			API.getMovie(movieToBeEdited.getTitle()).setDescription(movieEditDescriptionTextField.getText());
             			API.getMovie(movieToBeEdited.getTitle()).setPosterURL(movieEditURLTextField.getText());
+
             			
-            			movieEditTitleTextField.setText("");
                     	movieEditDayTextField.setText("");
                     	movieEditMonthTextField.setText("");
                     	movieEditYearTextField.setText("");
@@ -518,16 +519,17 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                     	movieEditURLTextField.setText("");
             		}
           //Used to confirm the changing of information about an actor, using input from the textfields.
-            if(buttonPressed.equals("confirmActorEdit") && !actorEditNameTextField.getText().equals("")
+            if(buttonPressed.equals("confirmActorEdit")
             		&& !actorEditDayTextField.getText().equals("") && !actorEditMonthTextField.getText().equals("")
             		 && !actorEditYearTextField.getText().equals("") && !actorEditGenderTextField.getText().equals("")
             		 && !actorEditNationalityTextField.getText().equals(""))
     		{
+
             	API.getActor(actorToBeEdited.getName()).setDob(Integer.parseInt(actorEditYearTextField.getText()),Integer.parseInt(actorEditMonthTextField.getText()),Integer.parseInt(actorEditDayTextField.getText()));
             	API.getActor(actorToBeEdited.getName()).setGender(actorEditGenderTextField.getText().toLowerCase()=="female");
             	API.getActor(actorToBeEdited.getName()).setNationality(actorEditNationalityTextField.getText());
+
             	
-            	actorEditNameTextField.setText("");
             	actorEditDayTextField.setText("");
             	actorEditMonthTextField.setText("");
             	actorEditYearTextField.setText("");
@@ -537,19 +539,20 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //Gets information already existing on an actor and puts it into the textfields for editing.
             if(buttonPressed.equals("getFieldsActor"))
     		{
+
             	System.out.println(actorToBeEdited);
-            	actorEditNameTextField.setText(actorToBeEdited.getName());
             	actorEditDayTextField.setText("" + actorToBeEdited.getDob().getDayOfMonth());
             	actorEditMonthTextField.setText("" + actorToBeEdited.getDob().getMonthValue());
             	actorEditYearTextField.setText("" + actorToBeEdited.getDob().getYear());
             	actorEditGenderTextField.setText(actorToBeEdited.getGender()?"female":"male");
             	actorEditNationalityTextField.setText(actorToBeEdited.getNationality());
+
     		}
           //Gets information already existing on a movie and puts it into the textfields for editing.
             if(buttonPressed.equals("getFieldsMovie"))
     		{
             	System.out.println(movieToBeEdited);
-            	movieEditTitleTextField.setText(movieToBeEdited.getTitle());
+
             	movieEditDayTextField.setText("" + movieToBeEdited.getDor().getDayOfMonth());
             	movieEditMonthTextField.setText("" + movieToBeEdited.getDor().getMonthValue());
             	movieEditYearTextField.setText("" + movieToBeEdited.getDor().getYear());
@@ -557,6 +560,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	movieEditGenreTextField.setText(movieToBeEdited.getGenre());
             	movieEditDescriptionTextField.setText(movieToBeEdited.getDescription());
             	movieEditURLTextField.setText(movieToBeEdited.getPosterURL());
+
     		}
             
             if(buttonPressed.equals("loadNDB"))
@@ -589,6 +593,73 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if(buttonPressed.equals("confirmMovieRemoval") && !movieRemovalTitleTextField.equals(""))
     		{
             	movieRemovalTitleTextField.setText("");	  	
+    		}
+            
+            if(buttonPressed.equals("movieActorSort"))
+    		{
+            	Button btn = ((Button) event.getSource());
+				String buttonText = ((Button) event.getSource()).getText();
+				if(buttonText.equals("Name (Ascending)")) 
+				{
+				btn.setText("Name (Descending)");
+				}
+				if(buttonText.equals("Name (Descending)")) 
+				{
+				btn.setText("DOB (Ascending)");
+				}
+				if(buttonText.equals("DOB (Ascending)")) 
+				{
+				btn.setText("DOB (Descending)");
+				}
+				if(buttonText.equals("DOB (Descending)")) 
+				{
+				btn.setText("Nationality (Ascending)");
+				}
+				if(buttonText.equals("Nationality (Ascending)")) 
+				{
+				btn.setText("Nationality (Descending)");
+				}
+				if(buttonText.equals("Nationality (Descending)")) 
+				{
+				btn.setText("Name (Ascending)");
+				}
+    		}
+            if(buttonPressed.equals("actorMovieSort"))
+    		{
+            	Button btn = ((Button) event.getSource());
+				String buttonText = ((Button) event.getSource()).getText();
+				if(buttonText.equals("Title (Ascending)")) 
+				{
+				btn.setText("Title (Descending)");
+				}
+				if(buttonText.equals("Title (Descending)")) 
+				{
+				btn.setText("Duration (Ascending)");
+				}
+				if(buttonText.equals("Duration (Ascending)")) 
+				{
+				btn.setText("Duration (Descending)");
+				}
+				if(buttonText.equals("Duration (Descending)")) 
+				{
+				btn.setText("DOR (Ascending)");
+				}
+				if(buttonText.equals("DOR (Ascending)")) 
+				{
+				btn.setText("DOR (Descending)");
+				}
+				if(buttonText.equals("DOR (Descending)")) 
+				{
+				btn.setText("Genre (Ascending)");
+				}
+				if(buttonText.equals("Genre (Ascending)")) 
+				{
+				btn.setText("Genre (Descending)");
+				}
+				if(buttonText.equals("Genre (Descending)")) 
+				{
+				btn.setText("Title (Ascending)");
+				}
     		}
             
             

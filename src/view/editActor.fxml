@@ -23,7 +23,6 @@
                   <TextField fx:id="actorEditNationalityTextField" layoutX="223.0" layoutY="188.0" />
                   <TextField fx:id="actorEditGenderTextField" layoutX="223.0" layoutY="155.0" />
                   <TextField fx:id="actorEditDayTextField" layoutX="223.0" layoutY="119.0" prefHeight="25.0" prefWidth="35.0" />
-                  <TextField fx:id="actorEditNameTextField" layoutX="223.0" layoutY="84.0" />
                   <Label alignment="CENTER" layoutX="177.0" layoutY="44.0" text="Edit Actor Fields" textAlignment="CENTER" />
                   <Label layoutX="29.0" layoutY="88.0" text="Actor Name:" />
                   <Label layoutX="29.0" layoutY="122.0" text="Date of Birth (DD/MM/YY)" />
@@ -33,6 +32,7 @@
                   <TextField fx:id="actorEditYearTextField" layoutX="337.0" layoutY="118.0" prefHeight="25.0" prefWidth="35.0" />
                   <Button fx:id="confirmActorEdit" layoutX="188.0" layoutY="256.0" mnemonicParsing="false" onAction="#handle" text="Confirm Edit" />
                   <Button fx:id="getFieldsActor" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" text="Get Fields for Actor" />
+                  <Label fx:id="actorNameToBeEdited" layoutX="266.0" layoutY="88.0" text="Actor Name" />
                </children>
             </AnchorPane>
         </items>

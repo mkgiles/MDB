@@ -62,13 +62,14 @@
                   <TextField fx:id="movieDayTextField" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
                   <Label layoutX="262.0" layoutY="190.0" prefHeight="17.0" prefWidth="52.0" text="Released" />
                   <TextField fx:id="movieTitleTextField" layoutX="263.0" layoutY="220.0" prefHeight="25.0" prefWidth="174.0" promptText="Title" />
-                  <Label layoutX="173.0" layoutY="284.0" text="Results:" />
                   <TextField fx:id="movieMonthTextField" layoutX="385.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="M" />
                   <TextField fx:id="movieYearTextField" layoutX="410.0" layoutY="190.0" prefHeight="25.0" prefWidth="25.0" promptText="Y" />
-                  <Button fx:id="dispMovieSearch" layoutX="261.0" layoutY="257.0" mnemonicParsing="false" onAction="#handle" text="Search" />
+                  <Button fx:id="dispMovieSearch" layoutX="382.0" layoutY="275.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="52.0" text="Search" />
                   <Button fx:id="showActorList" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Display Actors" />
                   <Button fx:id="inspectActor" layoutX="25.0" layoutY="336.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Inspect Actor" />
                   <Button fx:id="editActor" layoutX="25.0" layoutY="361.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="133.0" text="Edit Actor" />
+                  <Button fx:id="actorMovieSort" layoutX="231.0" layoutY="275.0" mnemonicParsing="false" onAction="#handle" text="Title (Ascending)" />
+                  <Label layoutX="173.0" layoutY="279.0" text="Sorting By:" />
                </children>
             </AnchorPane>
         </items>
