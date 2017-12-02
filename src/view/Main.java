@@ -108,8 +108,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField loadNDBTextField;
 	@FXML private TextField saveNDBTextField;
 	
-	private static String movieToBeEdited;
-	private static String actorToBeEdited;
+	private static Movie movieToBeEdited;
+	private static Actor actorToBeEdited;
 	
 	//Initialization of primary scene as well as stage.
 	
@@ -202,7 +202,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //Changes scene to editActor only if there is an actor selected in the listview to edit.
             if(buttonPressed.equals("editActor") && listviewActors.getSelectionModel().getSelectedItem() != null)
             {
-            	actorToBeEdited = listviewActors.getSelectionModel().getSelectedItem().getName();
+            	actorToBeEdited = listviewActors.getSelectionModel().getSelectedItem();
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
         		stage.close();
             	try {
@@ -216,7 +216,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //Changes scene to editMovie only if there is a movie selected in the listview to edit.
             if(buttonPressed.equals("editMovie") && listviewMovies.getSelectionModel().getSelectedItem() != null)
             {
-            	movieToBeEdited = listviewMovies.getSelectionModel().getSelectedItem().getTitle(); 
+            	movieToBeEdited = listviewMovies.getSelectionModel().getSelectedItem(); 
             	Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
         		stage.close();
             	try {
@@ -321,6 +321,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             //Shows actor list, populated with all actors.
             if(buttonPressed.equals("showActorList")) 
 			{	
+            	listviewActors.getItems().clear();
             	for(int i = 0; i<API.listActors().length();i++)
             		listviewActors.getItems().add(API.listActors().get(i));
 			}
@@ -444,6 +445,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	System.out.println(actorAddDayInput + "/" + actorAddMonthInput + "/" + actorAddYearInput);
             	System.out.println(actorAddGenderInput);
             	System.out.println(actorAddNationalityInput);
+            	
             	API.addActor(new Actor(actorAddNameInput, actorAddGenderInput.toLowerCase().equals("female"),actorAddNationalityInput,Integer.parseInt(actorAddYearInput),Integer.parseInt(actorAddMonthInput),Integer.parseInt(actorAddDayInput)));
             	
             	actorAddNameTextField.setText("");
@@ -500,14 +502,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             		&& !movieEditGenreTextField.getText().equals("")&& !movieEditDescriptionTextField.getText().equals("")
             		&& !movieEditURLTextField.getText().equals(""))
             		{
-            			String movieEditTitleInput = movieEditTitleTextField.getText();
-            			String movieEditDayInput = movieEditDayTextField.getText();
-            			String movieEditMonthInput = movieEditMonthTextField.getText();
-            			String movieEditYearInput = movieEditYearTextField.getText();
-            			String movieEditDurationInput = movieEditDurationTextField.getText();
-            			String movieEditGenreInput = movieEditGenreTextField.getText();
-            			String movieEditDescriptionInput = movieEditDescriptionTextField.getText();
-            			String movieEditURLInput = movieEditURLTextField.getText();
+            			API.getMovie(movieToBeEdited.getTitle()).setDor(Integer.parseInt(movieEditYearTextField.getText()),Integer.parseInt(movieEditMonthTextField.getText()),Integer.parseInt(movieEditDayTextField.getText()));
+            			API.getMovie(movieToBeEdited.getTitle()).setRunningTime(Integer.parseInt(movieEditDurationTextField.getText()));
+            			API.getMovie(movieToBeEdited.getTitle()).setGenre(movieEditGenreTextField.getText());
+            			API.getMovie(movieToBeEdited.getTitle()).setDescription(movieEditDescriptionTextField.getText());
+            			API.getMovie(movieToBeEdited.getTitle()).setPosterURL(movieEditURLTextField.getText());
             			
             			movieEditTitleTextField.setText("");
                     	movieEditDayTextField.setText("");
@@ -524,12 +523,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             		 && !actorEditYearTextField.getText().equals("") && !actorEditGenderTextField.getText().equals("")
             		 && !actorEditNationalityTextField.getText().equals(""))
     		{
-            	String actorEditNameInput = actorEditNameTextField.getText();
-            	String actorEditDayInput = actorEditDayTextField.getText();
-            	String actorEditMonthInput = actorEditMonthTextField.getText();
-            	String actorEditYearInput = actorEditYearTextField.getText();
-            	String actorEditGenderInput = actorEditGenderTextField.getText();
-            	String actorEditNationalityInput = actorEditNationalityTextField.getText();
+            	API.getActor(actorToBeEdited.getName()).setDob(Integer.parseInt(actorEditYearTextField.getText()),Integer.parseInt(actorEditMonthTextField.getText()),Integer.parseInt(actorEditDayTextField.getText()));
+            	API.getActor(actorToBeEdited.getName()).setGender(actorEditGenderTextField.getText().toLowerCase()=="female");
+            	API.getActor(actorToBeEdited.getName()).setNationality(actorEditNationalityTextField.getText());
             	
             	actorEditNameTextField.setText("");
             	actorEditDayTextField.setText("");
@@ -542,25 +538,25 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if(buttonPressed.equals("getFieldsActor"))
     		{
             	System.out.println(actorToBeEdited);
-            	actorEditNameTextField.setText(actorToBeEdited);
-            	actorEditDayTextField.setText("");
-            	actorEditMonthTextField.setText("");
-            	actorEditYearTextField.setText("");
-            	actorEditGenderTextField.setText("");
-            	actorEditNationalityTextField.setText("");
+            	actorEditNameTextField.setText(actorToBeEdited.getName());
+            	actorEditDayTextField.setText("" + actorToBeEdited.getDob().getDayOfMonth());
+            	actorEditMonthTextField.setText("" + actorToBeEdited.getDob().getMonthValue());
+            	actorEditYearTextField.setText("" + actorToBeEdited.getDob().getYear());
+            	actorEditGenderTextField.setText(actorToBeEdited.getGender()?"female":"male");
+            	actorEditNationalityTextField.setText(actorToBeEdited.getNationality());
     		}
           //Gets information already existing on a movie and puts it into the textfields for editing.
             if(buttonPressed.equals("getFieldsMovie"))
     		{
             	System.out.println(movieToBeEdited);
-            	movieEditTitleTextField.setText(movieToBeEdited);
-            	movieEditDayTextField.setText("");
-            	movieEditMonthTextField.setText("");
-            	movieEditYearTextField.setText("");
-            	movieEditDurationTextField.setText("");
-            	movieEditGenreTextField.setText("");
-            	movieEditDescriptionTextField.setText("");
-            	movieEditURLTextField.setText("");
+            	movieEditTitleTextField.setText(movieToBeEdited.getTitle());
+            	movieEditDayTextField.setText("" + movieToBeEdited.getDor().getDayOfMonth());
+            	movieEditMonthTextField.setText("" + movieToBeEdited.getDor().getMonthValue());
+            	movieEditYearTextField.setText("" + movieToBeEdited.getDor().getYear());
+            	movieEditDurationTextField.setText("" + movieToBeEdited.getRunningTime());
+            	movieEditGenreTextField.setText(movieToBeEdited.getGenre());
+            	movieEditDescriptionTextField.setText(movieToBeEdited.getDescription());
+            	movieEditURLTextField.setText(movieToBeEdited.getPosterURL());
     		}
             
             if(buttonPressed.equals("loadNDB"))
