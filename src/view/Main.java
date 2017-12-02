@@ -395,8 +395,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     		}
             
             //Used to add actors to system, based on what is read from the TextFields.
-            if(buttonPressed.equals("addActorToSystem"))
-    		{
+
+            if(buttonPressed.equals("addActorToSystem") && !actorAddNameTextField.getText().equals("") 
+                	&& !actorAddDayTextField.getText().equals("") && !actorAddMonthTextField.getText().equals("")
+                	&& !actorAddYearTextField.getText().equals("") && !actorAddGenderTextField.getText().equals("")
+                	&& !actorAddNationalityTextField.getText().equals("")) 
+            {
             	
             	String actorAddNameInput = actorAddNameTextField.getText();
             	String actorAddDayInput = actorAddDayTextField.getText();
@@ -421,7 +425,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             
             
           //Used to add Movies to system, based on what is read from the TextFields.
-            if(buttonPressed.equals("addMovieToSystem"))
+            if(buttonPressed.equals("addMovieToSystem") && !movieAddTitleTextField.getText().equals("") &&
+            		!movieAddDayTextField.getText().equals("") && !movieAddMonthTextField.getText().equals("")
+            		&& !movieAddYearTextField.getText().equals("") && !movieAddDurationTextField.getText().equals("")
+            		&& !movieAddGenreTextField.getText().equals("") && !movieAddDescriptionTextField.getText().equals("")
+            		&& !movieAddURLTextField.getText().equals(""))
     		{
             	
             	String movieAddTitleInput = movieAddTitleTextField.getText();
@@ -455,7 +463,11 @@ public class Main extends Application implements EventHandler<ActionEvent> {
     		}
             
             //Used to confirm the changing of information about a movie, using input from the textfields.
-            if(buttonPressed.equals("confirmMovieEdit"))
+            if(buttonPressed.equals("confirmMovieEdit") && !movieEditTitleTextField.getText().equals("")
+            		&& !movieEditDayTextField.getText().equals("")&& !movieEditMonthTextField.getText().equals("")
+            		&& !movieEditYearTextField.getText().equals("")&& !movieEditDurationTextField.getText().equals("")
+            		&& !movieEditGenreTextField.getText().equals("")&& !movieEditDescriptionTextField.getText().equals("")
+            		&& !movieEditURLTextField.getText().equals(""))
             		{
             			String movieEditTitleInput = movieEditTitleTextField.getText();
             			String movieEditDayInput = movieEditDayTextField.getText();
@@ -476,7 +488,10 @@ public class Main extends Application implements EventHandler<ActionEvent> {
                     	movieEditURLTextField.setText("");
             		}
           //Used to confirm the changing of information about an actor, using input from the textfields.
-            if(buttonPressed.equals("confirmActorEdit"))
+            if(buttonPressed.equals("confirmActorEdit") && !actorEditNameTextField.getText().equals("")
+            		&& !actorEditDayTextField.getText().equals("") && !actorEditMonthTextField.getText().equals("")
+            		 && !actorEditYearTextField.getText().equals("") && !actorEditGenderTextField.getText().equals("")
+            		 && !actorEditNationalityTextField.getText().equals(""))
     		{
             	String actorEditNameInput = actorEditNameTextField.getText();
             	String actorEditDayInput = actorEditDayTextField.getText();
