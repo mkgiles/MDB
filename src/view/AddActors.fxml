@@ -36,7 +36,6 @@
                   <TextField fx:id="actorAddMonthTextField" layoutX="280.0" layoutY="119.0" prefHeight="25.0" prefWidth="35.0" />
                   <TextField fx:id="actorAddYearTextField" layoutX="337.0" layoutY="118.0" prefHeight="25.0" prefWidth="35.0" />
                   <Button fx:id="addActorToSystem" layoutX="188.0" layoutY="256.0" mnemonicParsing="false" onAction="#handle" text="Add Actor" />
-                  <Button fx:id="addActorFromNDB" layoutX="337.0" layoutY="359.0" mnemonicParsing="false" text="Add from NDB" />
                </children>
             </AnchorPane>
         </items>

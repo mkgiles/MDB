@@ -101,6 +101,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField actorEditNationalityTextField;
 	@FXML private TextField actorEditGenderTextField;
 	
+	@FXML private TextField loadNDBTextField;
+	@FXML private TextField saveNDBTextField;
+	
 	private static String movieToBeEdited;
 	private static String actorToBeEdited;
 	
@@ -506,6 +509,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	movieEditGenreTextField.setText("");
             	movieEditDescriptionTextField.setText("");
             	movieEditURLTextField.setText("");
+    		}
+            
+            if(buttonPressed.equals("loadNDB"))
+    		{
+            	//loadNDBTextField is our text field.
+    		}
+            
+            if(buttonPressed.equals("saveNDB"))
+    		{
+            	//saveNDBTextField is our text field.
     		}
             
             
