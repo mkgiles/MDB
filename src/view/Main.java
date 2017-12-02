@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import model.*;
 import structures.DataList;
+import structures.Link;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -117,6 +118,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField actorRemoveRoleNameTextField;
 	@FXML private TextField movieRemoveRoleTitleTextField;
 	@FXML private TextField actorRemoveRoleCharacterTextField;
+	private BiPredicate<Movie, Movie> actorSearchPredicate = (a,b) -> a.getTitle().compareTo(b.getTitle())<=0;
 	
 	private static Movie movieToBeEdited;
 	private static Actor actorToBeEdited;
@@ -423,28 +425,38 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	 	String movieGenreInput = movieGenreTextField.getText();
             	 	String movieDurationInput = movieDurationTextField.getText();
             	 	
+            	 	DataList<Movie> list = API.listMovies();
+            	 	
             	if(movieTitleBool == true)
             	{
             		System.out.println("Title Checkbox selected.");
             		System.out.println(movieTitleInput);
+            		list = list.getSubList(p -> p.getTitle().equals(movieTitleInput));
             	}
             	if(movieDorBool == true)
             	{
             		System.out.println("Date of Release Checkbox selected.");
             		System.out.println(movieDayInput + "/" + movieMonthInput + "/" + movieYearInput);
+            		list = list.getSubList(p -> p.getDor().equals(LocalDate.of(Integer.parseInt(movieYearInput), Integer.parseInt(movieMonthInput), Integer.parseInt(movieDayInput))));
+            		
             	}
             	if(movieGenreBool == true)
             	{
             		System.out.println("Genre Checkbox selected.");
             		System.out.println(movieGenreInput);
+            		list = list.getSubList(p -> p.getGenre().equals(movieGenreInput));
             	}
             	if(movieDurationBool == true)
             	{
             		System.out.println("Duration Checkbox selected.");
             		System.out.println(movieDurationInput);
+            		list = list.getSubList(p -> p.getRunningTime() == Integer.parseInt(movieDurationInput));
             	}
-            	actorSearchMovies.getItems().setAll();
-//            	actorSearchMovies.getItems().addAll("List Object");
+            	list = list.sort(actorSearchPredicate);
+            	actorSearchMovies.getItems().clear();
+            	for(int i=0; i<list.length();i++) {
+            		actorSearchMovies.getItems().add(list.get(i));
+            	}
 			}
             
             //Used to pass information from movie clicked on in listView to window on the right.
@@ -635,11 +647,13 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             
             if(buttonPressed.equals("confirmActorRemoval") && !actorRemovalNameTextField.equals(""))
     		{
+            	API.dropActor(actorRemovalNameTextField.getText());
             	actorRemovalNameTextField.setText("");
     		}
             
             if(buttonPressed.equals("confirmMovieRemoval") && !movieRemovalTitleTextField.equals(""))
     		{
+            	API.dropMovie(movieRemovalTitleTextField.getText());
             	movieRemovalTitleTextField.setText("");	  	
     		}
             
@@ -685,40 +699,49 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				if(buttonText.equals("Title (Ascending)")) 
 				{
 				btn.setText("Title (Descending)");
+				actorSearchPredicate = (a,b) -> a.getTitle().compareTo(b.getTitle())>=0;
 				}
 				if(buttonText.equals("Title (Descending)")) 
 				{
 				btn.setText("Duration (Ascending)");
+				actorSearchPredicate = (a,b) -> a.getRunningTime()-b.getRunningTime()<=0;
 				}
 				if(buttonText.equals("Duration (Ascending)")) 
 				{
 				btn.setText("Duration (Descending)");
+				actorSearchPredicate = (a,b) -> a.getRunningTime()-b.getRunningTime()>=0;
 				}
 				if(buttonText.equals("Duration (Descending)")) 
 				{
 				btn.setText("DOR (Ascending)");
+				actorSearchPredicate = (a,b) -> a.getDor().compareTo(b.getDor())<=0;
 				}
-				if(buttonText.equals("DOR (Ascending)")) 
+				if(buttonText.equals("DOR (Ascending)"))
 				{
 				btn.setText("DOR (Descending)");
+				actorSearchPredicate = (a,b) -> a.getDor().compareTo(b.getDor())>=0;
 				}
 				if(buttonText.equals("DOR (Descending)")) 
 				{
 				btn.setText("Genre (Ascending)");
+				actorSearchPredicate = (a,b) -> a.getGenre().compareTo(b.getGenre())<=0;
 				}
 				if(buttonText.equals("Genre (Ascending)")) 
 				{
 				btn.setText("Genre (Descending)");
+				actorSearchPredicate = (a,b) -> a.getGenre().compareTo(b.getGenre())>=0;
 				}
 				if(buttonText.equals("Genre (Descending)")) 
 				{
 				btn.setText("Title (Ascending)");
+				actorSearchPredicate = (a,b) -> a.getTitle().compareTo(b.getTitle())<=0;
 				}
     		}
             
             if(buttonPressed.equals("confirmRoleAdd") && !actorAddRoleNameTextField.getText().equals("")
             		&& !movieAddRoleTitleTextField.getText().equals("") && !actorAddRoleCharacterTextField.getText().equals(""))
     		{
+            	API.addRole(new Link<Actor, String, Movie>(API.getActor(actorAddRoleNameTextField.getText()),actorAddRoleCharacterTextField.getText(),API.getMovie(movieAddRoleTitleTextField.getText())));
             	actorAddRoleNameTextField.setText("");
             	actorAddRoleCharacterTextField.setText("");
             	movieAddRoleTitleTextField.setText("");
@@ -727,6 +750,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if(buttonPressed.equals("confirmRoleRemove") && !actorRemoveRoleNameTextField.getText().equals("")
             		&& !movieRemoveRoleTitleTextField.getText().equals("") && !actorRemoveRoleCharacterTextField.getText().equals(""))
     		{
+            	API.dropRole(actorRemoveRoleCharacterTextField.getText());
             	actorRemoveRoleNameTextField.setText("");
             	actorRemoveRoleCharacterTextField.setText("");
             	movieRemoveRoleTitleTextField.setText("");

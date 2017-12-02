@@ -156,14 +156,14 @@ public class DataList<T> {
 	public void drop(Predicate<T> p) {
 		for(Node<T> temp = head; temp != null; temp = temp.next) {
 			if(p.test(temp.data)) {
-				if(length() > 1) {
-					temp.next.prev = temp.prev;
+				if(temp.prev != null)
 					temp.prev.next = temp.next;
-				}
-				else {
-					this.head = null;
-					this.tail = null;
-				}
+				else
+					this.head = temp.next;
+				if(temp.next != null)
+					temp.next.prev = temp.prev;
+				else
+					this.tail = temp.prev;
 			}
 		}
 	}
