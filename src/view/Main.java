@@ -102,6 +102,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	@FXML private TextField actorEditNationalityTextField;
 	@FXML private TextField actorEditGenderTextField;
 	
+	@FXML private TextField actorRemovalNameTextField;
+	@FXML private TextField movieRemovalTitleTextField;
+	
 	@FXML private TextField loadNDBTextField;
 	@FXML private TextField saveNDBTextField;
 	
@@ -258,6 +261,34 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             		
             		try {
     					changeScene("MDB (Written by Conor Giles and Andrew Bates)", "MDB.fxml");
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				};
+            }
+            
+          //Changes scene to removeActors
+            if(buttonPressed.equals("removeActors"))
+            {
+            		Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+            		stage.close();
+            		
+            		try {
+    					changeScene("Remove Actors", "removeActor.fxml");
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				};
+            }
+            
+          //Changes scene to removeMovies
+            if(buttonPressed.equals("removeMovies"))
+            {
+            		Stage stage = (Stage)((Button) event.getSource()).getScene().getWindow();
+            		stage.close();
+            		
+            		try {
+    					changeScene("Remove Movies", "removeMovie.fxml");
     				} catch (IOException e) {
     					// TODO Auto-generated catch block
     					e.printStackTrace();
@@ -552,6 +583,16 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+    		}
+            
+            if(buttonPressed.equals("confirmActorRemoval") && !actorRemovalNameTextField.equals(""))
+    		{
+            	actorRemovalNameTextField.setText("");
+    		}
+            
+            if(buttonPressed.equals("confirmMovieRemoval") && !movieRemovalTitleTextField.equals(""))
+    		{
+            	movieRemovalTitleTextField.setText("");	  	
     		}
             
             
