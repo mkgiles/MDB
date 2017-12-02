@@ -38,10 +38,10 @@ public class API {
 			roles.append(link);
 	}
 	public static DataList<Actor> listActors(){
-		return actors.list();
+		return actors==null?null:actors.list();
 	}
 	public static DataList<Movie> listMovies(){
-		return movies.list();
+		return movies==null?null:movies.list();
 	}
 	public static DataList<Link<Actor,String,Movie>> listRoles(){
 		return roles;

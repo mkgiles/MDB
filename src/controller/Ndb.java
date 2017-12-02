@@ -96,33 +96,39 @@ public class Ndb {
 		afile.delete();
 		afile.createNewFile();
 		BufferedWriter file = new BufferedWriter(new FileWriter(afile));
-		for(Node<Actor> temp = API.listActors().getNode(0);temp!=null;temp=temp.next) {
-			Actor actor = temp.data;
-			file.write("type=actor");
-			file.write(" name=" + actor.getName().replace(" ", "_"));
-			file.write(" gender=" + (actor.getGender()?"female":"male"));
-			file.write(" nation=" + actor.getNationality());
-			file.write(" dob=" + actor.getDob().getYear() + "-" + actor.getDob().getMonthValue() + "-" + actor.getDob().getDayOfMonth());
-			file.newLine();
+		if(API.listActors()!=null) {
+			for(Node<Actor> temp = API.listActors().getNode(0);temp!=null;temp=temp.next) {
+				Actor actor = temp.data;
+				file.write("type=actor");
+				file.write(" name=" + actor.getName().replace(" ", "_"));
+				file.write(" gender=" + (actor.getGender()?"female":"male"));
+				file.write(" nation=" + actor.getNationality());
+				file.write(" dob=" + actor.getDob().getYear() + "-" + actor.getDob().getMonthValue() + "-" + actor.getDob().getDayOfMonth());
+				file.newLine();
+			}
 		}
-		for(Node<Movie> temp = API.listMovies().getNode(0);temp!=null;temp=temp.next) {
-			Movie movie =  temp.data;
-			file.write("type=movie");
-			file.write(" title=" + movie.getTitle().replace(" ", "_"));
-			file.write(" runtime=" + movie.getRunningTime());
-			file.write(" genre=" + movie.getGenre().replace(" ", "_"));
-			file.write(" description=" + movie.getDescription().replace(" ", "_"));
-			file.write(" poster=" + movie.getPosterURL());
-			file.write(" release=" + movie.getDor().getYear() + "-" + movie.getDor().getMonthValue() + "-" + movie.getDor().getDayOfMonth());
-			file.newLine();
+		if(API.listMovies()!=null) {
+			for(Node<Movie> temp = API.listMovies().getNode(0);temp!=null;temp=temp.next) {
+				Movie movie =  temp.data;
+				file.write("type=movie");
+				file.write(" title=" + movie.getTitle().replace(" ", "_"));
+				file.write(" runtime=" + movie.getRunningTime());
+				file.write(" genre=" + movie.getGenre().replace(" ", "_"));
+				file.write(" description=" + movie.getDescription().replace(" ", "_"));
+				file.write(" poster=" + movie.getPosterURL());
+				file.write(" release=" + movie.getDor().getYear() + "-" + movie.getDor().getMonthValue() + "-" + movie.getDor().getDayOfMonth());
+				file.newLine();
+			}
 		}
-		for(Node<Link<Actor,String,Movie>> temp = API.listRoles().getNode(0);temp!=null;temp=temp.next) {
-			Link<Actor,String,Movie> role = temp.data;
-			file.write("type=role");
-			file.write(" actor=" + role.source().getName().replace(" ", "_"));
-			file.write(" movie=" + role.dest().getTitle().replace(" ", "_"));
-			file.write(" role=" + role.path().replace(" ", "_"));
-			file.newLine();
+		if(API.listRoles()!=null) {
+			for(Node<Link<Actor,String,Movie>> temp = API.listRoles().getNode(0);temp!=null;temp=temp.next) {
+				Link<Actor,String,Movie> role = temp.data;
+				file.write("type=role");
+				file.write(" actor=" + role.source().getName().replace(" ", "_"));
+				file.write(" movie=" + role.dest().getTitle().replace(" ", "_"));
+				file.write(" role=" + role.path().replace(" ", "_"));
+				file.newLine();
+			}
 		}
 		file.close();
 	}

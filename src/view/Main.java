@@ -4,6 +4,7 @@ package view;
 import java.io.IOException;
 
 import controller.API;
+import controller.Ndb;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -406,6 +407,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	System.out.println(actorAddDayInput + "/" + actorAddMonthInput + "/" + actorAddYearInput);
             	System.out.println(actorAddGenderInput);
             	System.out.println(actorAddNationalityInput);
+            	API.addActor(new Actor(actorAddNameInput, actorAddGenderInput.toLowerCase().equals("female"),actorAddNationalityInput,Integer.parseInt(actorAddYearInput),Integer.parseInt(actorAddMonthInput),Integer.parseInt(actorAddDayInput)));
             	
             	actorAddNameTextField.setText("");
             	actorAddDayTextField.setText("");
@@ -435,6 +437,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	System.out.println(movieAddGenreInput);
             	System.out.println(movieAddDescriptionInput);
             	System.out.println(movieAddURLInput);
+            	
+            	API.addMovie(new Movie(movieAddTitleInput, Integer.parseInt(movieAddDurationInput), movieAddGenreInput, movieAddDescriptionInput, movieAddURLInput, Integer.parseInt(movieAddYearInput), Integer.parseInt(movieAddMonthInput), Integer.parseInt(movieAddDayInput)));
             	
             	movieAddTitleTextField.setText("");
             	movieAddDayTextField.setText("");
@@ -514,11 +518,23 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if(buttonPressed.equals("loadNDB"))
     		{
             	//loadNDBTextField is our text field.
+            	try {
+					Ndb.parse(loadNDBTextField.getText());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     		}
             
             if(buttonPressed.equals("saveNDB"))
     		{
             	//saveNDBTextField is our text field.
+            	try {
+					Ndb.save(saveNDBTextField.getText());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     		}
             
             
