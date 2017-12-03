@@ -159,6 +159,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
             
 			String buttonPressed = ((Button) event.getSource()).getId();
+			//Changes scene to ViewMovies
             if(buttonPressed.equals("viewMovies"))
             {
             	
@@ -409,7 +410,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 			}
             
             //Shows results of search. Each bool determines whether search criteria is used or not.
-            //Need to add roles here, too.
             if(buttonPressed.equals("dispMovieSearch")) 
 			{  
             	
@@ -464,8 +464,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             		{
             	Movie currentSelection = listviewMovies.getSelectionModel().getSelectedItem();
             	System.out.println(currentSelection);
-            	//Put function here to match title in selection with title of movie.
-            	//Fill other fields with other criteria (Title, Running Time, Genre.)
             	movieTitle.setText(currentSelection.getTitle());
             	movieDor.setText(currentSelection.getDor().toString());
             	movieRunningTime.setText("" + currentSelection.getRunningTime());
@@ -477,8 +475,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             if(buttonPressed.equals("inspectActor"))
     		{
             	Actor currentSelection = listviewActors.getSelectionModel().getSelectedItem();
-            	//Put function here to match name in selection with name of actor.
-            	//Fill other fields with other criteria (Name, Gender, DoB, etc.)
             	System.out.println(currentSelection);
             	actorName.setText(currentSelection.getName());
             	actorGender.setText(currentSelection.getGender()?"female":"male");
@@ -623,9 +619,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 
     		}
             
+            //Loads NDB using textfield for file name
             if(buttonPressed.equals("loadNDB"))
     		{
-            	//loadNDBTextField is our text field.
             	try {
 					Ndb.parse(loadNDBTextField.getText());
 				} catch (Exception e) {
@@ -633,10 +629,9 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 					e.printStackTrace();
 				}
     		}
-            
+            //Saves NDB using textfield for file name
             if(buttonPressed.equals("saveNDB"))
     		{
-            	//saveNDBTextField is our text field.
             	try {
 					Ndb.save(saveNDBTextField.getText());
 				} catch (Exception e) {
@@ -645,18 +640,20 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				}
     		}
             
+            //Drops actor while also being validated to only do so when removal textfield is not blank.
             if(buttonPressed.equals("confirmActorRemoval") && !actorRemovalNameTextField.equals(""))
     		{
             	API.dropActor(actorRemovalNameTextField.getText());
             	actorRemovalNameTextField.setText("");
     		}
-            
+          //Drops movie while also being validated to only do so when removal textfield is not blank.
             if(buttonPressed.equals("confirmMovieRemoval") && !movieRemovalTitleTextField.equals(""))
     		{
             	API.dropMovie(movieRemovalTitleTextField.getText());
             	movieRemovalTitleTextField.setText("");	  	
     		}
             
+            //Cycles through sort types for display.
             if(buttonPressed.equals("movieActorSort"))
     		{
             	Button btn = ((Button) event.getSource());
@@ -692,6 +689,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				movieSearchPredicate = (a,b) -> a.getName().compareTo(b.getName())<=0;
 				}
     		}
+            
+          //Cycles through sort types for display.
             if(buttonPressed.equals("actorMovieSort"))
     		{
             	Button btn = ((Button) event.getSource());
@@ -738,6 +737,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 				}
     		}
             
+            //Adds role while also being validated to only do so if textfields aren't blank.
             if(buttonPressed.equals("confirmRoleAdd") && !actorAddRoleNameTextField.getText().equals("")
             		&& !movieAddRoleTitleTextField.getText().equals("") && !actorAddRoleCharacterTextField.getText().equals(""))
     		{
@@ -746,7 +746,7 @@ public class Main extends Application implements EventHandler<ActionEvent> {
             	actorAddRoleCharacterTextField.setText("");
             	movieAddRoleTitleTextField.setText("");
     		}
-            
+            //Removes role while also being validated to only do so if textfields aren't blank.
             if(buttonPressed.equals("confirmRoleRemove") && !actorRemoveRoleNameTextField.getText().equals("")
             		&& !movieRemoveRoleTitleTextField.getText().equals("") && !actorRemoveRoleCharacterTextField.getText().equals(""))
     		{
