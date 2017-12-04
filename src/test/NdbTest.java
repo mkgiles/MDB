@@ -34,8 +34,10 @@ class NdbTest {
 	@Test
 	final void testSave() throws Exception {
 		API.addActor(new Actor("Matt Damon", false, "USA", 1970, 10, 8));
-		API.addMovie(new Movie("The Martian", 144, "Comedy (apparently)", "During a manned mission to Mars...", "image.jpg", 2015, 10, 2));
-		API.addRole(new Link<Actor, String, Movie>(API.getActor("Matt Damon"), "Mark Watney", API.getMovie("The Martian")));
+		API.addMovie(new Movie("The Martian", 144, "Comedy (apparently)", "During a manned mission to Mars...",
+				"image.jpg", 2015, 10, 2));
+		API.addRole(
+				new Link<Actor, String, Movie>(API.getActor("Matt Damon"), "Mark Watney", API.getMovie("The Martian")));
 		Ndb.save("test.ndb");
 		API.clear();
 		Ndb.parse("test.ndb");

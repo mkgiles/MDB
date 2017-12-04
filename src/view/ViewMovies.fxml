@@ -56,7 +56,7 @@
                   <CheckBox fx:id="actorDobCB" layoutX="175.0" layoutY="232.0" mnemonicParsing="false" text="Search By" />
                   <TextField fx:id="actorNameTextField" layoutX="264.0" layoutY="191.0" prefHeight="25.0" prefWidth="175.0" promptText="Actor Name" />
                   <CheckBox fx:id="actorNationalityCB" layoutX="175.0" layoutY="253.0" mnemonicParsing="false" text="Search By" />
-                  <Button fx:id="GTLT" layoutX="315.0" layoutY="220.0" mnemonicParsing="false" onAction="#handle" text="&lt;" />
+                  <Button fx:id="GTLTBirth" layoutX="315.0" layoutY="220.0" mnemonicParsing="false" onAction="#handle" text="&lt;" />
                   <TextField fx:id="actorDayTextField" layoutX="360.0" layoutY="220.0" prefHeight="25.0" prefWidth="25.0" promptText="D" />
                   <Label layoutX="263.0" layoutY="224.0" prefHeight="17.0" prefWidth="52.0" text="Birthday" />
                   <TextField fx:id="actorNationalityTextField" layoutX="264.0" layoutY="249.0" prefHeight="25.0" prefWidth="174.0" promptText="Nationality" />

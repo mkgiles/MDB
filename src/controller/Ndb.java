@@ -8,23 +8,37 @@ import java.io.File;
 
 import model.*;
 import structures.*;
+
+/**
+ * The Class Ndb.
+ */
 //Class for parsing .ndb files and constructing a pseudo-database out of them.
 public class Ndb {
-	//phase one: reads the file and creates objects from the entries.
+	
+	/**
+	 * Parses the.
+	 *
+	 * @param filename
+	 *            the filename
+	 * @throws Exception
+	 *             the exception
+	 */
+	// phase one: reads the file and creates objects from the entries.
 	public static void parse(String filename) throws Exception {
 		BufferedReader file = new BufferedReader(new FileReader(filename));
 		String args = "";
 		String line = file.readLine();
-		while(line != null) {
-			if(line.startsWith(" ")) {
+		while (line != null) {
+			if (line.startsWith(" ")) {
 				args = args.concat(line);
-			}
-			else {
+			} else {
 				args = line;
 				String[] params = args.split("\\s+");
-				DataList<Pair<String,String>> object = new DataList<Pair<String, String>>(new Pair<String,String>(params[0].split("=")[0],params[0].split("=")[1]));
-				for(int i=1;i<params.length;i++) {
-					Pair<String, String> temp = new Pair<String, String>(params[i].split("=")[0],params[i].split("=")[1]);
+				DataList<Pair<String, String>> object = new DataList<Pair<String, String>>(
+						new Pair<String, String>(params[0].split("=")[0], params[0].split("=")[1]));
+				for (int i = 1; i < params.length; i++) {
+					Pair<String, String> temp = new Pair<String, String>(params[i].split("=")[0],
+							params[i].split("=")[1]);
 					object.append(temp);
 				}
 				convert(object);
@@ -34,95 +48,148 @@ public class Ndb {
 		}
 		file.close();
 	}
-	//method which parses the type of the entry and calls the corresponding conversion procedure.
+
+	// method which parses the type of the entry and calls the corresponding
+	/**
+	 * Convert.
+	 *
+	 * @param object
+	 *            the object
+	 * @throws Exception
+	 *             the exception
+	 */
+	// conversion procedure.
 	private static void convert(DataList<Pair<String, String>> object) throws Exception {
 		String type = extract(object, "type");
-		if(type.equals("actor")) {
+		if (type.equals("actor")) {
 			actor(object);
-		}
-		else if(type.equals("movie")) {
+		} else if (type.equals("movie")) {
 			movie(object);
-		}
-		else if(type.equals("role")) {
+		} else if (type.equals("role")) {
 			role(object);
-		}
-		else {
-			throw(new Exception("Invalid type."));
+		} else {
+			throw (new Exception("Invalid type."));
 		}
 	}
+
+	/**
+	 * Role.
+	 *
+	 * @param object
+	 *            the object
+	 */
 	private static void role(DataList<Pair<String, String>> object) {
-		Actor actor = API.getActor(extract(object,"actor").replace("_", " "));
+		Actor actor = API.getActor(extract(object, "actor").replace("_", " "));
 		Movie movie = API.getMovie(extract(object, "movie").replace("_", " "));
 		String role = extract(object, "role").replace("_", " ");
 		API.addRole(new Link<Actor, String, Movie>(actor, role, movie));
-		
+
 	}
+
+	/**
+	 * Extract.
+	 *
+	 * @param object
+	 *            the object
+	 * @param field
+	 *            the field
+	 * @return the string
+	 */
 	private static String extract(DataList<Pair<String, String>> object, String field) {
 		return object.get(p -> p.car().equals(field)).cdr();
 	}
+
+	/**
+	 * Actor.
+	 *
+	 * @param object
+	 *            the object
+	 * @throws Exception
+	 *             the exception
+	 */
 	private static void actor(DataList<Pair<String, String>> object) throws Exception {
 		String name = "", nation = "";
 		int year = 0, month = 0, day = 0;
 		Boolean gender = false;
-		if(!(extract(object,"type").equals("actor")))
+		if (!(extract(object, "type").equals("actor")))
 			throw (new Exception("Non-Actor object was parsed by Actor method."));
-		name = extract(object,"name").replace("_", " ");
-		gender = extract(object,"gender").equals("female")?true:false;
-		nation = extract(object,"nation");
-		String[] dob =extract(object,"dob").split("-");
+		name = extract(object, "name").replace("_", " ");
+		gender = extract(object, "gender").equals("female") ? true : false;
+		nation = extract(object, "nation");
+		String[] dob = extract(object, "dob").split("-");
 		year = Integer.parseInt(dob[0]);
 		month = Integer.parseInt(dob[1]);
 		day = Integer.parseInt(dob[2]);
 		API.addActor(new Actor(name, gender, nation, year, month, day));
 	}
+
+	/**
+	 * Movie.
+	 *
+	 * @param object
+	 *            the object
+	 * @throws Exception
+	 *             the exception
+	 */
 	private static void movie(DataList<Pair<String, String>> object) throws Exception {
 		String title = "", genre = "", description = "", posterURL = "";
 		int runtime = 0, year = 0, month = 0, day = 0;
-		if(!(extract(object,"type").equals("movie")))
+		if (!(extract(object, "type").equals("movie")))
 			throw (new Exception("Non-Movie object was parsed by Movie method."));
 		title = extract(object, "title").replace("_", " ");
-		runtime = Integer.parseInt(extract(object,"runtime"));
+		runtime = Integer.parseInt(extract(object, "runtime"));
 		genre = extract(object, "genre");
 		description = extract(object, "description").replace("_", " ");
 		posterURL = extract(object, "poster");
-		String[] release =extract(object,"release").split("-");
+		String[] release = extract(object, "release").split("-");
 		year = Integer.parseInt(release[0]);
 		month = Integer.parseInt(release[1]);
 		day = Integer.parseInt(release[2]);
 		API.addMovie(new Movie(title, runtime, genre, description, posterURL, year, month, day));
 	}
+
+	/**
+	 * Save.
+	 *
+	 * @param filename
+	 *            the filename
+	 * @throws Exception
+	 *             the exception
+	 */
 	public static void save(String filename) throws Exception {
 		File afile = new File(filename);
 		afile.delete();
 		afile.createNewFile();
 		BufferedWriter file = new BufferedWriter(new FileWriter(afile));
-		if(API.listActors()!=null) {
-			for(Node<Actor> temp = API.listActors().getNode(0);temp!=null;temp=temp.next) {
+		if (API.listActors() != null) {
+			for (Node<Actor> temp = API.listActors().getNode(0); temp != null; temp = temp.next) {
 				Actor actor = temp.data;
 				file.write("type=actor");
 				file.write(" name=" + actor.getName().replace(" ", "_"));
-				file.write(" gender=" + (actor.getGender()?"female":"male"));
+				file.write(" gender=" + (actor.getGender() ? "female" : "male"));
 				file.write(" nation=" + actor.getNationality());
-				file.write(" dob=" + actor.getDob().getYear() + "-" + actor.getDob().getMonthValue() + "-" + actor.getDob().getDayOfMonth());
+				file.write(" dob=" + actor.getDob().getYear() + "-" + actor.getDob().getMonthValue() + "-"
+						+ actor.getDob().getDayOfMonth());
 				file.newLine();
 			}
 		}
-		if(API.listMovies()!=null) {
-			for(Node<Movie> temp = API.listMovies().getNode(0);temp!=null;temp=temp.next) {
-				Movie movie =  temp.data;
+		if (API.listMovies() != null) {
+			for (Node<Movie> temp = API.listMovies().getNode(0); temp != null; temp = temp.next) {
+				Movie movie = temp.data;
 				file.write("type=movie");
 				file.write(" title=" + movie.getTitle().replace(" ", "_"));
 				file.write(" runtime=" + movie.getRunningTime());
 				file.write(" genre=" + movie.getGenre().replace(" ", "_"));
 				file.write(" description=" + movie.getDescription().replace(" ", "_"));
 				file.write(" poster=" + movie.getPosterURL());
-				file.write(" release=" + movie.getDor().getYear() + "-" + movie.getDor().getMonthValue() + "-" + movie.getDor().getDayOfMonth());
+				file.write(" release=" + movie.getDor().getYear() + "-" + movie.getDor().getMonthValue() + "-"
+						+ movie.getDor().getDayOfMonth());
 				file.newLine();
 			}
 		}
-		if(API.listRoles()!=null) {
-			for(Node<Link<Actor,String,Movie>> temp = API.listRoles().getNode(0);temp!=null;temp=temp.next) {
-				Link<Actor,String,Movie> role = temp.data;
+		if (API.listRoles() != null) {
+			for (Node<Link<Actor, String, Movie>> temp = API.listRoles().getNode(0); temp != null; temp = temp.next) {
+				Link<Actor, String, Movie> role = temp.data;
 				file.write("type=role");
 				file.write(" actor=" + role.source().getName().replace(" ", "_"));
 				file.write(" movie=" + role.dest().getTitle().replace(" ", "_"));

@@ -2,24 +2,51 @@ package model;
 
 import java.time.LocalDate;
 
-import structures.DataList;
-import structures.Link;
-import structures.Pair;
-
+/**
+ * The Class Movie.
+ */
 public class Movie {
-	private static int uuid = 0;
-	private int uid;
+	
+	/** The title. */
 	private String title;
+	
+	/** The running time. */
 	private int runningTime;
+	
+	/** The dor. */
 	private LocalDate dor;
+	
+	/** The genre. */
 	private String genre;
+	
+	/** The description. */
 	private String description;
+	
+	/** The poster URL. */
 	private String posterURL;
 
-	public Movie(String title, int runningTime, String genre, String description, String posterURL, int yearNum, int monthNum, int dayNum)
-	{
-		this.uid = uuid;
-		uuid = uuid+1;
+	/**
+	 * Instantiates a new movie.
+	 *
+	 * @param title
+	 *            the title
+	 * @param runningTime
+	 *            the running time
+	 * @param genre
+	 *            the genre
+	 * @param description
+	 *            the description
+	 * @param posterURL
+	 *            the poster URL
+	 * @param yearNum
+	 *            the year num
+	 * @param monthNum
+	 *            the month num
+	 * @param dayNum
+	 *            the day num
+	 */
+	public Movie(String title, int runningTime, String genre, String description, String posterURL, int yearNum,
+			int monthNum, int dayNum) {
 		setTitle(title);
 		setRunningTime(runningTime);
 		setGenre(genre);
@@ -27,66 +54,137 @@ public class Movie {
 		setPosterURL(posterURL);
 		setDor(yearNum, monthNum, dayNum);
 	}
-	
-	public void viewMovie()
-	{
+
+	/**
+	 * View movie.
+	 */
+	public void viewMovie() {
 		System.out.print("Showing movies");
 	}
-	
-	//SETTERS//
-	public void setPosterURL(String posterURL) 
-	{
-	this.posterURL = posterURL;		
+
+	/**
+	 * Sets the poster URL.
+	 *
+	 * @param posterURL
+	 *            the new poster URL
+	 */
+	// SETTERS//
+	public void setPosterURL(String posterURL) {
+		this.posterURL = posterURL;
 	}
-	public void setDescription(String description)
-	{
-		this.description = description;	
+
+	/**
+	 * Sets the description.
+	 *
+	 * @param description
+	 *            the new description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public void setGenre(String genre) 
-	{
-		this.genre = genre;	
+
+	/**
+	 * Sets the genre.
+	 *
+	 * @param genre
+	 *            the new genre
+	 */
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
-	public void setRunningTime(int runningTime) 
-	{
-		this.runningTime = runningTime;		
+
+	/**
+	 * Sets the running time.
+	 *
+	 * @param runningTime
+	 *            the new running time
+	 */
+	public void setRunningTime(int runningTime) {
+		this.runningTime = runningTime;
 	}
-	public void setTitle(String title) 
-	{
+
+	/**
+	 * Sets the title.
+	 *
+	 * @param title
+	 *            the new title
+	 */
+	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	public void setDor(int yearNum, int monthNum, int dayNum)
-	{
-		this.dor = LocalDate.of(yearNum,monthNum, dayNum);
+
+	/**
+	 * Sets the dor.
+	 *
+	 * @param yearNum
+	 *            the year num
+	 * @param monthNum
+	 *            the month num
+	 * @param dayNum
+	 *            the day num
+	 */
+	public void setDor(int yearNum, int monthNum, int dayNum) {
+		this.dor = LocalDate.of(yearNum, monthNum, dayNum);
 	}
-	
-	//GETTERS//
-	public String getPosterURL()
-	{
-		return posterURL;	
+
+	/**
+	 * Gets the poster URL.
+	 *
+	 * @return the poster URL
+	 */
+	// GETTERS//
+	public String getPosterURL() {
+		return posterURL;
 	}
-	public String getDescription()
-	{
+
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	public String getDescription() {
 		return description;
 	}
-	public String getGenre()
-	{
+
+	/**
+	 * Gets the genre.
+	 *
+	 * @return the genre
+	 */
+	public String getGenre() {
 		return genre;
 	}
-	public int getRunningTime()
-	{
+
+	/**
+	 * Gets the running time.
+	 *
+	 * @return the running time
+	 */
+	public int getRunningTime() {
 		return runningTime;
 	}
-	public String getTitle()
-	{
+
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
+	public String getTitle() {
 		return title;
 	}
-	public LocalDate getDor()
-	{
+
+	/**
+	 * Gets the dor.
+	 *
+	 * @return the dor
+	 */
+	public LocalDate getDor() {
 		return dor;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
